@@ -17,28 +17,28 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="Part of Zeyuan's Documentation that is ready to the public">
         <meta name="viewport" content="width=device-width">
-        <title>Home &mdash; Randomize Stuff</title>
-            <link rel="stylesheet" href="_static/normalize.css" type="text/css">
-            <link rel="stylesheet" href="_static/sphinx.css" type="text/css">
-            <link rel="stylesheet" href="_static/main.css" type="text/css">
-            <link rel="stylesheet" href="_static/tinkerturquoise.css" type="text/css">
-            <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-            <link rel="stylesheet" href="_static/font-awesome.min.css" type="text/css">
-        <link rel="shortcut icon" href="_static/tinkerer.ico" /><!-- Load modernizr and JQuery -->
-        <script src="_static/vendor/modernizr-2.6.2.min.js"></script>
+        <title>Automatically publish Tinkerer bld output to GitHub with Travis CI &mdash; Randomize Stuff</title>
+            <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/tinkerturquoise.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+            <link rel="stylesheet" href="../../../_static/font-awesome.min.css" type="text/css">
+        <link rel="shortcut icon" href="../../../_static/tinkerer.ico" /><!-- Load modernizr and JQuery -->
+        <script src="../../../_static/vendor/modernizr-2.6.2.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
-        <script src="_static/plugins.js"></script>
-        <script src="_static/main.js"></script>
-        <link rel="search" title="Search" href="search.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="rss.html" /><script type="text/javascript">
+        <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="../../../_static/plugins.js"></script>
+        <script src="../../../_static/main.js"></script>
+        <link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Hello World" href="../23/hello_world.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
+        URL_ROOT:    '../../../',
         VERSION:     '1.5',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
-    </script><script type="text/javascript" src="_static/underscore.js"></script><script type="text/javascript" src="_static/doctools.js"></script><script type="text/javascript" src="_static/disqus.js"></script></head>
+    </script><script type="text/javascript" src="../../../_static/underscore.js"></script><script type="text/javascript" src="../../../_static/doctools.js"></script><script type="text/javascript" src="../../../_static/disqus.js"></script></head>
     <body role="document">
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
@@ -47,27 +47,27 @@
       <div id="container">
   <header role="banner">
             <hgroup>
-              <h1><a href="#">Randomize Stuff</a></h1><h2>a tmp place to rest</h2></hgroup>
+              <h1><a href="../../../index.html">Randomize Stuff</a></h1><h2>a tmp place to rest</h2></hgroup>
           </header>
       
   <nav>
     <ul><li class="quicklink"><div class="rss">
-        <a href="rss.html" title="Subscribe via RSS"><span class="fa fa-lg fa-rss"></span></a>
+        <a href="../../../rss.html" title="Subscribe via RSS"><span class="fa fa-lg fa-rss"></span></a>
     </div></li><li class="main-nav">
-          <a href="#">Home</a>
+          <a href="../../../index.html">Home</a>
         </li>
       <li class="main-nav">
-          <a href="pages/about.html">About</a>
+          <a href="../../../pages/about.html">About</a>
         </li>
       <li>
-          <a href="archive.html">Archives</a>
+          <a href="../../../archive.html">Archives</a>
         </li>
     </ul>
   </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
             <span>November 27, 2016</span>
         </div>
-        <div class="section">
-            <span id="travis-gitpage"/><h1><a href="2016/11/27/automatically_publish_tinkerer_bld_output_to_github_with_travis_ci.html">Automatically publish Tinkerer bld output to GitHub with Travis CI</a></h1>
+    <div class="section" id="automatically-publish-tinkerer-bld-output-to-github-with-travis-ci">
+<span id="travis-gitpage"></span><h1>Automatically publish Tinkerer bld output to GitHub with Travis CI</h1>
 <div class="section" id="perface">
 <h2>Perface</h2>
 <p>I saw a comment from <a class="reference external" href="https://www.notionsandnotes.org/tech/web-development/pelican-static-blog-setup.html">a web</a>
@@ -81,17 +81,19 @@ in order to decouple the actual writing of blog posts from the publishing part.<
 (both for the articles themselves and the output), as well as simplifying things
 if you want to have guest posts and so on.</p>
 </div></blockquote>
-<p>That’s the place where I start to explore Travis CI.</p>
+<p>That&#8217;s the place where I start to explore Travis CI.</p>
 </div>
 <div class="section" id="travis-ci">
 <h2>Travis CI</h2>
-<p>Travis CI part isn’t hard to figure out. I referenced the following articles to get
+<p>Travis CI part isn&#8217;t hard to figure out. I referenced the following articles to get
 me started with this great tool, particularly with Sphinx-doc:</p>
 <blockquote>
-<div><ul class="simple"><li><a class="reference external" href="https://github.com/dwyl/learn-travis">learn-travis</a></li>
+<div><ul class="simple">
+<li><a class="reference external" href="https://github.com/dwyl/learn-travis">learn-travis</a></li>
 <li><a class="reference external" href="https://github.com/sphinx-doc/sphinx/blob/master/.travis.yml">Sphinx-doc repo .travis.yml</a></li>
 <li><a class="reference external" href="https://coderwall.com/p/wws2uq/have-travis-ci-test-your-sphinx-docs">Have Travis-CI test your Sphinx docs</a></li>
-</ul></div></blockquote>
+</ul>
+</div></blockquote>
 <p>The basic idea of Travis CI is quite simple. Once you commit something, it will
 trigger Travis CI to clone your repository, and run the command you specified in
 <span class="docutils literal"><span class="pre">.travis.yml</span></span> and then it will tell you the result of this commit (i.e.
@@ -104,35 +106,39 @@ Whether you pass all the test specified in <span class="docutils literal"><span 
 <p class="last">Tinkerer is built upon Sphinx-doc. Any Sphinx-doc-ish tool should have similar
 setup when work with Travis CI.</p>
 </div>
-<p>The setup for me is that I don’t use <span class="docutils literal"><span class="pre">gh-pages</span></span>. Instead, I directly use <span class="docutils literal"><span class="pre">master</span></span>
+<p>The setup for me is that I don&#8217;t use <span class="docutils literal"><span class="pre">gh-pages</span></span>. Instead, I directly use <span class="docutils literal"><span class="pre">master</span></span>
 branch as the source for my github page. The reason is that Tinkerer will generate
 <span class="docutils literal"><span class="pre">index.html</span></span> directly inside root directory of the repo, which will redirect the
 visit to <span class="docutils literal"><span class="pre">index.html</span></span> under <span class="docutils literal"><span class="pre">blog</span></span>. <span class="docutils literal"><span class="pre">blog</span></span> is the default output directory.</p>
 <p>Here are the tutorials I referenced. However, all of them talk about working with <span class="docutils literal"><span class="pre">gh-pages</span></span>:</p>
 <blockquote>
-<div><ul class="simple"><li><a class="reference external" href="https://gist.github.com/domenic/ec8b0fc8ab45f39403dd">Auto-deploying built products to gh-pages with Travis</a></li>
+<div><ul class="simple">
+<li><a class="reference external" href="https://gist.github.com/domenic/ec8b0fc8ab45f39403dd">Auto-deploying built products to gh-pages with Travis</a></li>
 <li><a class="reference external" href="https://benlimmer.com/2013/12/26/automatically-publish-javadoc-to-gh-pages-with-travis-ci/">Automatically Publish Javadoc to GitHub Pages with Travis CI</a></li>
-</ul></div></blockquote>
+</ul>
+</div></blockquote>
 <p>The first link above offers a framework of how you should get everything working and
-the second link’s bottom script offers some intuition.</p>
-<p>I’m not going to redo the work. I just want to point out something you need to be careful:</p>
-<ul class="simple"><li><strong>DO NOT using personal token.</strong> As mentioned by the first link, using a GitHub personal
-access token offers the full access to all your git repo. That’s a very high risk.</li>
+the second link&#8217;s bottom script offers some intuition.</p>
+<p>I&#8217;m not going to redo the work. I just want to point out something you need to be careful:</p>
+<ul class="simple">
+<li><strong>DO NOT using personal token.</strong> As mentioned by the first link, using a GitHub personal
+access token offers the full access to all your git repo. That&#8217;s a very high risk.</li>
 <li><strong>Be Careful with Public/Private.</strong> You need to use the Travis client to encrypt
 the <em>private</em> ssh key and upload the corresponding <em>public</em> ssh key to your repository.</li>
-<li><strong>Don’t put passphrase for your ssh key.</strong> If you do, Travis CI will ask for the passphrase
+<li><strong>Don&#8217;t put passphrase for your ssh key.</strong> If you do, Travis CI will ask for the passphrase
 during the automation process, which will lead to build hang. If this happens, regenerate
 the ssh key.</li>
-<li><strong>Be careful only upload your .enc file.</strong> Don’t upload your ssh private key to your repo.</li>
-</ul></div>
+<li><strong>Be careful only upload your .enc file.</strong> Don&#8217;t upload your ssh private key to your repo.</li>
+</ul>
+</div>
 <div class="section" id="decode-the-script">
 <h2>Decode the script</h2>
 <div class="section" id="travis-yml">
 <h3>.travis.yml</h3>
 <p>This is my <a class="reference external" href="https://github.com/xxks-kkk/blog/blob/master/.travis.yml">.travis.yml</a>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">language</span><span class="p">:</span> <span class="n">python</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">language</span><span class="p">:</span> <span class="n">python</span>
 <span class="n">python</span><span class="p">:</span>
-  <span class="o">-</span> <span class="s2">"2.7"</span>
+  <span class="o">-</span> <span class="s2">&quot;2.7&quot;</span>
 
 <span class="n">install</span><span class="p">:</span>
   <span class="o">-</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">tinkerer</span>
@@ -143,8 +149,8 @@ the ssh key.</li>
 
 <span class="n">env</span><span class="p">:</span>
   <span class="k">global</span><span class="p">:</span>
-  <span class="o">-</span> <span class="n">ENCRYPTION_LABEL</span><span class="p">:</span> <span class="s2">"8c1ec1f6b778"</span>
-  <span class="o">-</span> <span class="n">COMMIT_AUTHOR_EMAIL</span><span class="p">:</span> <span class="s2">"ferrishu3886@gmail.com"</span>
+  <span class="o">-</span> <span class="n">ENCRYPTION_LABEL</span><span class="p">:</span> <span class="s2">&quot;8c1ec1f6b778&quot;</span>
+  <span class="o">-</span> <span class="n">COMMIT_AUTHOR_EMAIL</span><span class="p">:</span> <span class="s2">&quot;ferrishu3886@gmail.com&quot;</span>
 
 <span class="n">after_success</span><span class="p">:</span>
   <span class="o">-</span> <span class="n">bash</span> <span class="o">./</span><span class="n">deploy</span><span class="o">.</span><span class="n">sh</span>
@@ -157,7 +163,8 @@ the ssh key.</li>
     <span class="n">on_failure</span><span class="p">:</span> <span class="n">always</span>
 </pre></div>
 </div>
-<ul class="simple"><li><span class="docutils literal"><span class="pre">install</span></span> section asks Travis CI to install the necessary packages to build our
+<ul class="simple">
+<li><span class="docutils literal"><span class="pre">install</span></span> section asks Travis CI to install the necessary packages to build our
 doc.</li>
 <li><span class="docutils literal"><span class="pre">script</span></span> section contains our doc build command.</li>
 <li><span class="docutils literal"><span class="pre">env</span></span> section contains environment variables required for our <span class="docutils literal"><span class="pre">deploy.sh</span></span>. They
@@ -165,7 +172,8 @@ are used to authorize a user on Travis CI to make <span class="docutils literal"
 <li><span class="docutils literal"><span class="pre">after_success</span></span> tells Travis CI what to do once the <span class="docutils literal"><span class="pre">script</span></span> section is done
 successfully.</li>
 <li><span class="docutils literal"><span class="pre">notifications</span></span> customize the email notification.</li>
-</ul></div>
+</ul>
+</div>
 <div class="section" id="deploy-sh">
 <h3>deploy.sh</h3>
 <p>For <a class="reference external" href="https://github.com/xxks-kkk/blog/blob/master/deploy.sh">deploy.sh</a> is easy to
@@ -182,85 +190,45 @@ want. Thus, we can let bld result to be pushed to our repo by asking user (i.e. 
 the remote server to do so.</p>
 </div>
 </div>
-        </div>
-        <div class="postmeta">
-        <div class="author">
-            <span>Posted by Zeyuan Hu</span>
-        </div>
-        <div class="categories">
-            <span>
-                Filed under:
-                <a href="categories/github.html">github</a>, <a href="categories/travis_ci.html">travis-ci</a></span>
-        </div>
-        <div class="tags">
-            <span>
-                Tags:
-                <a href="tags/github.html">github</a>, <a href="tags/travis_ci.html">travis-ci</a></span>
-        </div>
-        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
-            <span>November 23, 2016</span>
-        </div>
-        <div class="section">
-            <span id="hello-world-rst"/><h1><a href="2016/11/23/hello_world.html">Hello World</a></h1>
-<p>This blog will focus entirely on posts that involve either source code or
-mathematical expression. If you are looking for my posts about life reflection,
-book review, and many other non-technical posts, please check out <a class="reference external" href="https://zeyuanhu.wordpress.com/">my blog on wordpress</a>.</p>
-<div id="disqus_thread"/>
-<script>
+</div>
 
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_shortname = 'blog-ofbswlmyer';
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = '//blog-ofbswlmyer.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-        </div>
-        <div class="postmeta">
+    <div class="postmeta">
         <div class="author">
             <span>Posted by Zeyuan Hu</span>
         </div>
         <div class="categories">
             <span>
                 Filed under:
-                <a href="categories/misc.html">misc</a></span>
+                <a href="../../../categories/github.html">github</a>, <a href="../../../categories/travis_ci.html">travis-ci</a></span>
         </div>
         <div class="tags">
             <span>
                 Tags:
-                <a href="tags/meta.html">meta</a></span>
+                <a href="../../../tags/github.html">github</a>, <a href="../../../tags/travis_ci.html">travis-ci</a></span>
         </div>
-        </div><div class="archive_link">
-        <a href="archive.html"> &mdash; Blog Archive &mdash; </a>
-    </div></article><aside class="sidebar"><section><div class="widget">
+        </div>
+    <ul class="related clearfix">
+            <li class="left"></li>
+            <li class="right"><a href="../23/hello_world.html">Hello World</a> &raquo; </li>
+        </ul></article><aside class="sidebar"><section><div class="widget">
     <h1>Recent Posts</h1>
     <ul><li>
-            <a href="2016/11/27/automatically_publish_tinkerer_bld_output_to_github_with_travis_ci.html">Automatically publish Tinkerer bld output to GitHub with Travis CI</a>
+            <a href="#">Automatically publish Tinkerer bld output to GitHub with Travis CI</a>
         </li><li>
-            <a href="2016/11/23/hello_world.html">Hello World</a>
+            <a href="../23/hello_world.html">Hello World</a>
         </li></ul>
 </div>
 </section><section><div class="widget">
     <h1>Categories</h1>
-    <ul><li><a href="categories/github.html">github</a> (1)</li><li><a href="categories/misc.html">misc</a> (1)</li><li><a href="categories/travis_ci.html">travis-ci</a> (1)</li></ul>
+    <ul><li><a href="../../../categories/github.html">github</a> (1)</li><li><a href="../../../categories/misc.html">misc</a> (1)</li><li><a href="../../../categories/travis_ci.html">travis-ci</a> (1)</li></ul>
 </div></section><section><div class="widget">
     <h1>Tags Cloud</h1>
-      <a href="tags/github.html" style="font-size: 8pt">github</a>&nbsp;&nbsp;
-      <a href="tags/meta.html" style="font-size: 8pt">meta</a>&nbsp;&nbsp;
-      <a href="tags/travis_ci.html" style="font-size: 8pt">travis-ci</a>
+      <a href="../../../tags/github.html" style="font-size: 8pt">github</a>&nbsp;&nbsp;
+      <a href="../../../tags/meta.html" style="font-size: 8pt">meta</a>&nbsp;&nbsp;
+      <a href="../../../tags/travis_ci.html" style="font-size: 8pt">travis-ci</a>
 </div></section><section><div class="widget" id="searchbox" role="search">
     <h1><a href="#searchbox">Search</a></h1>
-    <form action="search.html" method="get">
+    <form action="../../../search.html" method="get">
         <input type="text" name="q" />
         <button type="submit"><span class="fa fa-search"></span></button>
     </form>

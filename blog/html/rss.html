@@ -5,8 +5,132 @@
         <link>http://zhu45.org/blog/blog/html/index.html/</link>
         <description>a tmp place to rest</description>
         <language>en-us</language>
-        <pubDate>Wed, 23 Nov 2016 00:00:00 +0000</pubDate>
+        <pubDate>Sun, 27 Nov 2016 00:00:00 +0000</pubDate>
         
+        <item>
+            <link>http://zhu45.org/blog/blog/html/index.html/2016/11/27/automatically_publish_tinkerer_bld_output_to_github_with_travis_ci.html</link>
+            <guid>http://zhu45.org/blog/blog/html/index.html/2016/11/27/automatically_publish_tinkerer_bld_output_to_github_with_travis_ci.html</guid>
+            <title><![CDATA[Automatically publish Tinkerer bld output to GitHub with Travis CI]]></title>
+            <description><![CDATA[<span id="travis-gitpage"/><h1>Automatically publish Tinkerer bld output to GitHub with Travis CI</h1>
+<div class="section" id="perface">
+<h2>Perface</h2>
+<p>I saw a comment from <a class="reference external" href="https://www.notionsandnotes.org/tech/web-development/pelican-static-blog-setup.html">a web</a>
+that talks about auto deployment with Travis CI</p>
+<blockquote>
+<div><p>As an aside, you can also use GitHub Pages for hosting, which is free,
+and then integrate it with Travis-CI to automatically publish the blog
+(basically run pelican to generate the output and push the changes back online)
+in order to decouple the actual writing of blog posts from the publishing part.</p>
+<p>The above also has the advantage of enabling a history of changes done
+(both for the articles themselves and the output), as well as simplifying things
+if you want to have guest posts and so on.</p>
+</div></blockquote>
+<p>That’s the place where I start to explore Travis CI.</p>
+</div>
+<div class="section" id="travis-ci">
+<h2>Travis CI</h2>
+<p>Travis CI part isn’t hard to figure out. I referenced the following articles to get
+me started with this great tool, particularly with Sphinx-doc:</p>
+<blockquote>
+<div><ul class="simple"><li><a class="reference external" href="https://github.com/dwyl/learn-travis">learn-travis</a></li>
+<li><a class="reference external" href="https://github.com/sphinx-doc/sphinx/blob/master/.travis.yml">Sphinx-doc repo .travis.yml</a></li>
+<li><a class="reference external" href="https://coderwall.com/p/wws2uq/have-travis-ci-test-your-sphinx-docs">Have Travis-CI test your Sphinx docs</a></li>
+</ul></div></blockquote>
+<p>The basic idea of Travis CI is quite simple. Once you commit something, it will
+trigger Travis CI to clone your repository, and run the command you specified in
+<span class="docutils literal"><span class="pre">.travis.yml</span></span> and then it will tell you the result of this commit (i.e.
+Whether you pass all the test specified in <span class="docutils literal"><span class="pre">.travis.yml</span></span>)</p>
+</div>
+<div class="section" id="work-with-tinkerer">
+<h2>Work with Tinkerer</h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Tinkerer is built upon Sphinx-doc. Any Sphinx-doc-ish tool should have similar
+setup when work with Travis CI.</p>
+</div>
+<p>The setup for me is that I don’t use <span class="docutils literal"><span class="pre">gh-pages</span></span>. Instead, I directly use <span class="docutils literal"><span class="pre">master</span></span>
+branch as the source for my github page. The reason is that Tinkerer will generate
+<span class="docutils literal"><span class="pre">index.html</span></span> directly inside root directory of the repo, which will redirect the
+visit to <span class="docutils literal"><span class="pre">index.html</span></span> under <span class="docutils literal"><span class="pre">blog</span></span>. <span class="docutils literal"><span class="pre">blog</span></span> is the default output directory.</p>
+<p>Here are the tutorials I referenced. However, all of them talk about working with <span class="docutils literal"><span class="pre">gh-pages</span></span>:</p>
+<blockquote>
+<div><ul class="simple"><li><a class="reference external" href="https://gist.github.com/domenic/ec8b0fc8ab45f39403dd">Auto-deploying built products to gh-pages with Travis</a></li>
+<li><a class="reference external" href="https://benlimmer.com/2013/12/26/automatically-publish-javadoc-to-gh-pages-with-travis-ci/">Automatically Publish Javadoc to GitHub Pages with Travis CI</a></li>
+</ul></div></blockquote>
+<p>The first link above offers a framework of how you should get everything working and
+the second link’s bottom script offers some intuition.</p>
+<p>I’m not going to redo the work. I just want to point out something you need to be careful:</p>
+<ul class="simple"><li><strong>DO NOT using personal token.</strong> As mentioned by the first link, using a GitHub personal
+access token offers the full access to all your git repo. That’s a very high risk.</li>
+<li><strong>Be Careful with Public/Private.</strong> You need to use the Travis client to encrypt
+the <em>private</em> ssh key and upload the corresponding <em>public</em> ssh key to your repository.</li>
+<li><strong>Don’t put passphrase for your ssh key.</strong> If you do, Travis CI will ask for the passphrase
+during the automation process, which will lead to build hang. If this happens, regenerate
+the ssh key.</li>
+<li><strong>Be careful only upload your .enc file.</strong> Don’t upload your ssh private key to your repo.</li>
+</ul></div>
+<div class="section" id="decode-the-script">
+<h2>Decode the script</h2>
+<div class="section" id="travis-yml">
+<h3>.travis.yml</h3>
+<p>This is my <a class="reference external" href="https://github.com/xxks-kkk/blog/blob/master/.travis.yml">.travis.yml</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">language</span><span class="p">:</span> <span class="n">python</span>
+<span class="n">python</span><span class="p">:</span>
+  <span class="o">-</span> <span class="s2">"2.7"</span>
+
+<span class="n">install</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">tinkerer</span>
+  <span class="o">-</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">sphinxjp</span><span class="o">.</span><span class="n">themes</span><span class="o">.</span><span class="n">tinkerturquoise</span>
+
+<span class="n">script</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">tinker</span> <span class="o">-</span><span class="n">b</span>
+
+<span class="n">env</span><span class="p">:</span>
+  <span class="k">global</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">ENCRYPTION_LABEL</span><span class="p">:</span> <span class="s2">"8c1ec1f6b778"</span>
+  <span class="o">-</span> <span class="n">COMMIT_AUTHOR_EMAIL</span><span class="p">:</span> <span class="s2">"ferrishu3886@gmail.com"</span>
+
+<span class="n">after_success</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">bash</span> <span class="o">./</span><span class="n">deploy</span><span class="o">.</span><span class="n">sh</span>
+
+<span class="n">notifications</span><span class="p">:</span>
+  <span class="n">email</span><span class="p">:</span>
+    <span class="n">recipients</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">ferrishu3886</span><span class="nd">@gmail</span><span class="o">.</span><span class="n">com</span>
+    <span class="n">on_success</span><span class="p">:</span> <span class="n">change</span> <span class="c1"># option [alway|never|change]</span>
+    <span class="n">on_failure</span><span class="p">:</span> <span class="n">always</span>
+</pre></div>
+</div>
+<ul class="simple"><li><span class="docutils literal"><span class="pre">install</span></span> section asks Travis CI to install the necessary packages to build our
+doc.</li>
+<li><span class="docutils literal"><span class="pre">script</span></span> section contains our doc build command.</li>
+<li><span class="docutils literal"><span class="pre">env</span></span> section contains environment variables required for our <span class="docutils literal"><span class="pre">deploy.sh</span></span>. They
+are used to authorize a user on Travis CI to make <span class="docutils literal"><span class="pre">git</span> <span class="pre">clone</span></span>, <span class="docutils literal"><span class="pre">git</span> <span class="pre">push</span></span>, etc.</li>
+<li><span class="docutils literal"><span class="pre">after_success</span></span> tells Travis CI what to do once the <span class="docutils literal"><span class="pre">script</span></span> section is done
+successfully.</li>
+<li><span class="docutils literal"><span class="pre">notifications</span></span> customize the email notification.</li>
+</ul></div>
+<div class="section" id="deploy-sh">
+<h3>deploy.sh</h3>
+<p>For <a class="reference external" href="https://github.com/xxks-kkk/blog/blob/master/deploy.sh">deploy.sh</a> is easy to
+understand if you take a look at the Travis CI log for a build.</p>
+<p>Travis CI first perform basic the environment setup. Then, it clones the git repository.
+Next, it builds our doc. If the build is success, it executes our <span class="docutils literal"><span class="pre">deploy.sh</span></span>.</p>
+<p>Inside <span class="docutils literal"><span class="pre">deploy.sh</span></span>, the main idea is to first clone the same repo (i.e. <span class="docutils literal"><span class="pre">travis-dup</span></span>)
+and copy the bld output pages (under <span class="docutils literal"><span class="pre">/xxks-kkk/blog/blog</span></span>) to the bld directory
+of the same repo we just cloned (i.e. <span class="docutils literal"><span class="pre">travis-dup/blog</span></span>). If there is nothing
+changed in the bld output pages, we exit. Else, we commit the changes and
+use the authencation we just added (i.e. <span class="docutils literal"><span class="pre">ssh-add</span> <span class="pre">travis</span></span>) and push the change to the repo.</p>
+<p>To keep it simpler, you can imagine Travis CI is a remote server that you can do anything you
+want. Thus, we can let bld result to be pushed to our repo by asking user (i.e. travis) from
+the remote server to do so.</p>
+</div>
+</div>]]></description>
+            <category><![CDATA[ github ]]></category>
+            <category><![CDATA[ travis-ci ]]></category>
+             <pubDate>Sun, 27 Nov 2016 00:00:00 +0000</pubDate>
+        </item>
+    
         <item>
             <link>http://zhu45.org/blog/blog/html/index.html/2016/11/23/hello_world.html</link>
             <guid>http://zhu45.org/blog/blog/html/index.html/2016/11/23/hello_world.html</guid>
