@@ -13,10 +13,17 @@ chmod 600 travis
 eval `ssh-agent -s`
 ssh-add travis
 
+# The main idea is to clone the same repo (i.e. travis-dup) and copy the bld output pages
+# (under /xxks-kkk/blog/blog) to the bld directory of the same repo we just cloned (i.e. 
+# travis-dup/blog). If there is nothing changed in the bld output pages, we exit. Else,
+# we commit the changes and use the authencation we just added (i.e. ssh-add travis) and
+# push the change to the repo
+
 original_repo=`pwd` #/home/travis/build/xxks-kkk/blog
 
 REPO=`git config remote.origin.url`
 SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
+SHA=`git rev-parse --verify HEAD`
 
 cd $HOME
 git clone $REPO travis-dup
@@ -47,20 +54,11 @@ if [ "$num_file_changed" -eq 1 -a "$file_changed" == "blog/doctrees/environment.
 fi
 
 git add .
-git commit -m "Deploy the build"
+git commit -m "Deploy the build: ${SHA}"
 git status
 
 git push $SSH_REPO master
 
-
-# SOURCE_BRANCH="master"
-# TARGET_BRANCH="master"
-# BLD_DIR="blog" # the build output directory (relative the root of the git repo)
-
-# # function doCompile
-# # {
-# #   tinker -b
-# # }
 
 # # Pull requests and commits to other branches shouldn't try to deploy, just build to verify
 # # if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "SOURCE_BRANCH" ]; then
@@ -69,35 +67,5 @@ git push $SSH_REPO master
 # #     exit 0
 # # fi
 
-# # Save some useful information
-# REPO=`git config remote.origin.url`
-# SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
-# SHA=`git rev-parse --verify HEAD`
 
-# # Clone the existing gh-pages for this repo into $BLD_DIR/
-# # Create a new empty branch if gh-pages doesn't exist yet (should only happen on first deploy)
-
-# cd $HOME
-# git clone $REPO $BLD_DIR
-# cd $BLD_DIR
-
-# # git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
-# # cd ..
-
-# # Clean out existing contents
-# rm -rf blog/* || exit 0
-# cp -rf $HOME/xxks-kkk/blog/blog $BLD_DIR/blog
-
-# # Run our compile script
-# #doCompile
-
-
-
-# # Commit the "changes"
-# #git commit -am "Deploy to GitHub Pages: ${SHA}"
-
-
-
-# # Now that we're all set up, we can push.
-# git push $SSH_REPO $TARGET_BRANCH
 
