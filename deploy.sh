@@ -13,7 +13,8 @@ chmod 600 travis
 eval `ssh-agent -s`
 ssh-add travis
 
-cd $HOME/xxks-kkk/blog
+pwd
+cd xxks-kkk/blog
 
 # If there are no changes to the compiled out then just bail
 if [ -z `git diff --exit-code` 2> /dev/null ]; then
