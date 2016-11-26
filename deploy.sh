@@ -5,6 +5,7 @@ set -vx # Display the command execution. For debug purpose.
 
 SOURCE_BRANCH="master"
 TARGET_BRANCH="gh-pages"
+BLD_DIR="blog" # the build output directory (relative the root of the git repo)
 
 function doCompile
 {
@@ -26,20 +27,21 @@ REPO=`git config remote.origin.url`
 SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
 SHA=`git rev-parse --verify HEAD`
 
-# Clone the existing gh-pages for this repo into blog/
+# Clone the existing gh-pages for this repo into $BLD_DIR/
 # Create a new empty branch if gh-pages doesn't exist yet (should only happen on first deploy)
-git clone $REPO blog
-cd blog
+rm -rf $BLD_DIR/**/* || exit 0
+git clone $REPO $BLD_DIR
+cd $BLD_DIR
 git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
 cd ..
 
 # Clean out existing contents
-rm -rf out/**/* || exit 0
+rm -rf $BLD_DIR/**/* || exit 0
 
 # Run our compile script
 doCompile
 
-cd blog
+cd $BLD_DIR
 git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
 
