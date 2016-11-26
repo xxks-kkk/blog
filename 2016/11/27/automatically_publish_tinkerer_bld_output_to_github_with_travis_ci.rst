@@ -147,5 +147,4 @@ To keep it simpler, you can imagine Travis CI is a remote server that you can do
 want. Thus, we can let bld result to be pushed to our repo by asking user (i.e. travis) from 
 the remote server to do so. 
 
-
 .. include:: /comment.rst
