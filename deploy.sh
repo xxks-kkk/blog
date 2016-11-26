@@ -36,7 +36,8 @@ git config --global user.name "Travis CI"
 git config --global user.email "$COMMIT_AUTHOR_EMAIL"
 
 git status
-git commit -am "Deploy the build"
+git add .
+git commit -m "Deploy the build"
 
 git push $SSH_REPO master
 
