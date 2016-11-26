@@ -33,7 +33,7 @@ website = 'http://zhu45.org/blog/blog/html/index.html'
 
 # Add your Disqus shortname to enable comments powered by Disqus
 #disqus_shortname = None
-disqus_shortname = 'zeyuan'
+disqus_shortname = 'blog-ofbswlmyer'
 
 # Change your favicon (new favicon goes in _static directory)
 html_favicon = '_static/tinkerer.ico'
