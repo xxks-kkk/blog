@@ -29,21 +29,23 @@ SHA=`git rev-parse --verify HEAD`
 
 # Clone the existing gh-pages for this repo into $BLD_DIR/
 # Create a new empty branch if gh-pages doesn't exist yet (should only happen on first deploy)
-# rm -rf $BLD_DIR/**/* || exit 0
-# git clone $REPO $BLD_DIR
-# cd $BLD_DIR
+
+cd $HOME
+git config user.name "Travis CI"
+git config user.email "$COMMIT_AUTHOR_EMAIL"
+git clone $REPO $BLD_DIR
+cd $BLD_DIR
+
 # git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
 # cd ..
 
 # Clean out existing contents
-# rm -rf $BLD_DIR/**/* || exit 0
+rm -rf blog/* || exit 0
+cp -rf $HOME/xxks-kkk/blog/blog $BLD_DIR/blog
 
 # Run our compile script
 #doCompile
 
-# cd $BLD_DIR
-git config user.name "Travis CI"
-git config user.email "$COMMIT_AUTHOR_EMAIL"
 
 # If there are no changes to the compiled out then just bail
 if [ -z `git diff --exit-code` 2> /dev/null ]; then
@@ -52,7 +54,8 @@ if [ -z `git diff --exit-code` 2> /dev/null ]; then
 fi
 
 # Commit the "changes"
-git commit -am "Deploy to GitHub Pages: ${SHA}"
+#git commit -am "Deploy to GitHub Pages: ${SHA}"
+git commit -am "Deploy the build"
 
 # Get the deploy key by using Travis's stored variables to decrypt deploy_key.enc
 ENCRYPTED_KEY_VAR="encrypted_${ENCRYPTION_LABEL}_key"
@@ -65,6 +68,5 @@ eval `ssh-agent -s`
 ssh-add travis
 
 # Now that we're all set up, we can push.
-#git push $SSH_REPO $TARGET_BRANCH
-git push
+git push $SSH_REPO $TARGET_BRANCH
 
