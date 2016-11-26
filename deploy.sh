@@ -41,7 +41,7 @@ num_file_changed=`git diff --name-only | wc -l`
 file_changed=`git diff --name-only`
 echo $file_changed
 
-if [ "$num_file_changed" -eq 1 -a "$file_changed" == "environment.pickle" -a "$file_changed" == "doctrees/environment.pickle" ]; then
+if [ "$num_file_changed" -eq 1 -a "$file_changed" == "blog/doctrees/environment.pickle" ]; then
   git checkout $file_changed
   exit 0
 fi
