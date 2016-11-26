@@ -76,6 +76,8 @@ I'm not going to redo the work. I just want to point out something you need to b
   during the automation process, which will lead to build hang. If this happens, regenerate
   the ssh key.
 
+- **Be careful only upload your .enc file.** Don't upload your ssh private key to your repo.
+
 ********************
 Decode the script
 ********************
