@@ -24,8 +24,12 @@ fi
 git config --global user.name "Travis CI"
 git config --global user.email "$COMMIT_AUTHOR_EMAIL"
 
+git status
 git commit -am "Deploy the build"
-git push
+REPO=`git config remote.origin.url`
+SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
+
+git push $SSH_REPO master
 
 # SOURCE_BRANCH="master"
 # TARGET_BRANCH="master"
@@ -44,8 +48,6 @@ git push
 # # fi
 
 # # Save some useful information
-# REPO=`git config remote.origin.url`
-# SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
 # SHA=`git rev-parse --verify HEAD`
 
 # # Clone the existing gh-pages for this repo into $BLD_DIR/
@@ -73,5 +75,5 @@ git push
 
 
 # # Now that we're all set up, we can push.
-# git push $SSH_REPO $TARGET_BRANCH
+
 
