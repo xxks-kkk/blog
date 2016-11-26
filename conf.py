@@ -25,7 +25,7 @@ author = 'Zeyuan Hu'
 copyright = '2016, ' + author
 
 # Change this to your blog root URL (required for RSS feed)
-website = 'http://zhu45.org/blog/html/'
+website = 'http://zhu45.org/blog/blog/html/index.html'
 
 # **************************************************************
 # More tweaks you can do
@@ -68,7 +68,7 @@ first_page_title = None
 # **************************************************************
 
 # Add other Sphinx extensions here
-extensions = ['tinkerer.ext.blog', 'tinkerer.ext.disqus', 'sphinxjp.themecore']
+extensions = ['tinkerer.ext.blog', 'tinkerer.ext.disqus']
 
 # Add other template paths here
 templates_path = ['_templates']
