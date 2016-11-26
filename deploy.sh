@@ -24,8 +24,13 @@ fi
 git config --global user.name "Travis CI"
 git config --global user.email "$COMMIT_AUTHOR_EMAIL"
 
+git status
 git commit -am "Deploy the build"
-git push
+REPO=`git config remote.origin.url`
+SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
+
+git push $SSH_REPO master
+
 
 # SOURCE_BRANCH="master"
 # TARGET_BRANCH="master"
