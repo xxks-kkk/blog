@@ -42,7 +42,7 @@ file_changed=`git diff --name-only`
 echo $file_changed
 
 if [ "$num_file_changed" -eq 1 -a "$file_changed" == "blog/doctrees/environment.pickle" ]; then
-  git checkout $file_changed
+  git checkout doctrees/environment.pickle
   exit 0
 fi
 
