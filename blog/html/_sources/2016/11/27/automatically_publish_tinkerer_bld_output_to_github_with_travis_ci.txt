@@ -148,4 +148,4 @@ want. Thus, we can let bld result to be pushed to our repo by asking user (i.e. 
 the remote server to do so. 
 
 
-.. include:: /comments.rst
+.. include:: /comment.rst
