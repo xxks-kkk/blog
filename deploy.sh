@@ -4,7 +4,7 @@ set -e  # Exit with nonzero exit code if anything fails
 set -vx # Display the command execution. For debug purpose.
 
 SOURCE_BRANCH="master"
-TARGET_BRANCH="gh-pages"
+TARGET_BRANCH="master"
 BLD_DIR="blog" # the build output directory (relative the root of the git repo)
 
 function doCompile
@@ -29,19 +29,19 @@ SHA=`git rev-parse --verify HEAD`
 
 # Clone the existing gh-pages for this repo into $BLD_DIR/
 # Create a new empty branch if gh-pages doesn't exist yet (should only happen on first deploy)
-rm -rf $BLD_DIR/**/* || exit 0
-git clone $REPO $BLD_DIR
-cd $BLD_DIR
-git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
-cd ..
+# rm -rf $BLD_DIR/**/* || exit 0
+# git clone $REPO $BLD_DIR
+# cd $BLD_DIR
+# git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
+# cd ..
 
 # Clean out existing contents
-rm -rf $BLD_DIR/**/* || exit 0
+# rm -rf $BLD_DIR/**/* || exit 0
 
 # Run our compile script
 doCompile
 
-cd $BLD_DIR
+# cd $BLD_DIR
 git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
 
