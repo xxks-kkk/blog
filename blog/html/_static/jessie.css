@@ -1,0 +1,11 @@
+code {
+    padding: 1px 4px;
+    color: #D14;
+    font-family: Menlo,Monaco,"Courier New",monospace;
+    font-size: 15px;
+    /*background-color: #F7F7F9;*/
+    backgroud-color: #FFF;
+    border: 1px solid #E1E1E8;
+    font-weight: bold;
+}
+
