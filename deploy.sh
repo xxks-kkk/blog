@@ -46,14 +46,13 @@ git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
 
 # If there are no changes to the compiled out then just bail
-if [ -z `git diff --exit-code` ]; then
+if [ -z `git diff --exit-code` 2> /dev/null ]; then
     echo "No changes to the output on this push; exiting."
     exit 0
 fi
 
 # Commit the "changes"
-git add .
-git commit -m "Deploy to GitHub Pages: ${SHA}"
+git commit -am "Deploy to GitHub Pages: ${SHA}"
 
 # Get the deploy key by using Travis's stored variables to decrypt deploy_key.enc
 ENCRYPTED_KEY_VAR="encrypted_${ENCRYPTION_LABEL}_key"
