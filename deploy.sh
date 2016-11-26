@@ -13,7 +13,18 @@ chmod 600 travis
 eval `ssh-agent -s`
 ssh-add travis
 
-pwd
+original_repo=`pwd` #/home/travis/build/xxks-kkk/blog
+
+REPO=`git config remote.origin.url`
+SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
+
+cd $HOME
+git clone $REPO travis-dup
+cd travis-dup
+
+cd blog
+rm -rf *
+cp -r $original_repo/blog/* .
 
 # If there are no changes to the compiled out then just bail
 if [ -z `git diff --exit-code` 2> /dev/null ]; then
@@ -26,8 +37,6 @@ git config --global user.email "$COMMIT_AUTHOR_EMAIL"
 
 git status
 git commit -am "Deploy the build"
-REPO=`git config remote.origin.url`
-SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
 
 git push $SSH_REPO master
 
