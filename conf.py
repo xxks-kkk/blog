@@ -13,7 +13,7 @@ import tinkerer.paths
 project = 'Randomize Stuff'
 
 # Change this to the tagline of your blog
-tagline = 'tech,thoughts,cat'
+tagline = 'a tmp place to rest'
 
 # Change this to the description of your blog
 description = 'Part of Zeyuan\'s Documentation that is ready to the public'
