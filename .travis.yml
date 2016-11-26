@@ -7,9 +7,12 @@ install:
   - pip install sphinxjp.themes.tinkerturquoise
 
 script:
-  - bash ./deploy.sh
+  - tinker -b
 
 env:
   global:
   - ENCRYPTION_LABEL: "8c1ec1f6b778"
   - COMMIT_AUTHOR_EMAIL: "ferrishu3886@gmail.com"
+
+after_success:
+  - bash ./deploy.sh
