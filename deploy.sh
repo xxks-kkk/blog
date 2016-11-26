@@ -36,8 +36,19 @@ git config --global user.name "Travis CI"
 git config --global user.email "$COMMIT_AUTHOR_EMAIL"
 
 git status
+
+num_file_changed=`git diff --name-only | wc -l`
+file_changed=`git diff --name-only`
+echo $file_changed
+
+if [ "$num_file_changed" -eq 1 -a "$file_changed" == "environment.pickle" -a "$file_changed" == "doctrees/environment.pickle" ]; then
+  git checkout $file_changed
+  exit 0
+fi
+
 git add .
 git commit -m "Deploy the build"
+git status
 
 git push $SSH_REPO master
 
