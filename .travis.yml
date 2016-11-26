@@ -16,3 +16,10 @@ env:
 
 after_success:
   - bash ./deploy.sh
+
+notifications:
+  email:
+    recipients:
+      - ferrishu3886@gmail.com
+    on_success: change # option [alway|never|change]
+    on_failure: always
