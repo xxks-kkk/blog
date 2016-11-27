@@ -12,7 +12,7 @@ env:
   - COMMIT_AUTHOR_EMAIL: "ferrishu3886@gmail.com"
 
 script:
-  - pwd
+  - tinker -b
 
 after_success:
   - bash ./deploy.sh
