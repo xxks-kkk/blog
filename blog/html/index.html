@@ -109,7 +109,7 @@ Things can get rusty pretty quickly. So, I need a way to keep fresh.</p>
 </div>
 <p>When I try to work through the linked list related questions in Chapter 2, the first thing
 I need to do is to able to verify my solution. I need to figure out a way to quickly
-generate a test linked list. So, that’s what <span class="docutils literal"><span class="pre">List</span> <span class="pre">initializeList(ET</span> <span class="pre">A[],</span> <span class="pre">int</span> <span class="pre">arrayLen);</span></span> for.</p>
+generate a test linked list. So, that’s what <span class="code docutils literal"><span class="pre">List</span> <span class="pre">initializeList(ET</span> <span class="pre">A[],</span> <span class="pre">int</span> <span class="pre">arrayLen);</span></span> for.</p>
 <div class="highlight-c"><div class="highlight"><pre><span/><span class="k">static</span> <span class="n">List</span>
 <span class="nf">initializeNoHeaderList</span><span class="p">(</span><span class="n">ET</span> <span class="n">A</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">arrayLen</span><span class="p">)</span>
 <span class="p">{</span>
@@ -150,10 +150,10 @@ actually generate linked list from a given array. Inside <span class="docutils l
 we use <em>recursion</em> to generate the list from array.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If we actually change <span class="docutils literal"><span class="pre">tmpNode-&gt;Next</span> <span class="pre">=</span> <span class="pre">initializeNoHeaderList(A+1,</span> <span class="pre">arrayLen-1);</span></span>
-to <span class="docutils literal"><span class="pre">tmpNode-&gt;Next</span> <span class="pre">=</span> <span class="pre">initializeList(A+1,</span> <span class="pre">arrayLen-1);</span></span>, this can lead to
+<p class="last">If we actually change <span class="code docutils literal"><span class="pre">tmpNode-&gt;Next</span> <span class="pre">=</span> <span class="pre">initializeNoHeaderList(A+1,</span> <span class="pre">arrayLen-1);</span></span>
+to <span class="code docutils literal"><span class="pre">tmpNode-&gt;Next</span> <span class="pre">=</span> <span class="pre">initializeList(A+1,</span> <span class="pre">arrayLen-1);</span></span>, this can lead to
 a list contains nodes alternate between actual data node and the dummy node.
-(i.e. <span class="docutils literal"><span class="pre">ET</span> <span class="pre">test_arr[]</span> <span class="pre">=</span> <span class="pre">{23,</span> <span class="pre">44,</span> <span class="pre">45,</span> <span class="pre">57,</span> <span class="pre">89,</span> <span class="pre">-1};</span></span> then the generated linked list
+(i.e. <span class="code docutils literal"><span class="pre">ET</span> <span class="pre">test_arr[]</span> <span class="pre">=</span> <span class="pre">{23,</span> <span class="pre">44,</span> <span class="pre">45,</span> <span class="pre">57,</span> <span class="pre">89,</span> <span class="pre">-1};</span></span> then the generated linked list
 will be <span class="docutils literal"><span class="pre">23-&gt;0-&gt;44-&gt;0-&gt;45-&gt;0-&gt;57-&gt;0-&gt;89-&gt;0-&gt;-1-&gt;0-&gt;</span></span>)</p>
 </div>
 </div>
@@ -182,7 +182,7 @@ So, <span class="docutils literal"><span class="pre">&amp;A[1]</span></span> (A[
 <li><p class="first">to use <span class="docutils literal"><span class="pre">exit</span></span> function, you need <span class="docutils literal"><span class="pre">#include</span> <span class="pre">&lt;stdlib.h&gt;</span></span></p>
 </li>
 <li><p class="first">Don’t forget about <span class="docutils literal"><span class="pre">;</span></span> during <span class="docutils literal"><span class="pre">struct</span></span> definition. Otherwise, you can get
-<span class="docutils literal"><span class="pre">error:</span> <span class="pre">two</span> <span class="pre">or</span> <span class="pre">more</span> <span class="pre">data</span> <span class="pre">types</span> <span class="pre">in</span> <span class="pre">declaration</span> <span class="pre">specifiers</span></span></p>
+“error: two or more data types in declaration specifiers”</p>
 </li>
 <li><p class="first">We use <span class="docutils literal"><span class="pre">static</span></span> for <span class="docutils literal"><span class="pre">initializeNoHeaderList</span></span> to make the function only visible
 to the file we implement it (i.e. <span class="docutils literal"><span class="pre">main.c</span></span>). This is the way we keep a helper function
