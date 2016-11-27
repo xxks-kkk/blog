@@ -11,6 +11,9 @@ env:
   - ENCRYPTION_LABEL: "8c1ec1f6b778"
   - COMMIT_AUTHOR_EMAIL: "ferrishu3886@gmail.com"
 
+script:
+  - pwd
+
 after_success:
   - bash ./deploy.sh
 
