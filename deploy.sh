@@ -21,6 +21,8 @@ ssh-add travis
 
 original_repo=`pwd` #/home/travis/build/xxks-kkk/blog
 
+tinker -b # move the bld from "script" in .travis.yml to here to save the build time.
+
 REPO=`git config remote.origin.url`
 SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
 SHA=`git rev-parse --verify HEAD`

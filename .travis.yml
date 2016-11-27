@@ -6,9 +6,6 @@ install:
   - pip install tinkerer
   - pip install sphinxjp.themes.tinkerturquoise
 
-script:
-  - tinker -b
-
 env:
   global:
   - ENCRYPTION_LABEL: "8c1ec1f6b778"
