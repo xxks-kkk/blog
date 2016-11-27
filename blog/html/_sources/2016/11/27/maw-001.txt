@@ -1,0 +1,123 @@
+.. maw-001.rst:
+
+##########################################
+Generate a Linked List from a given array
+##########################################
+
+.. author:: default
+.. categories:: c, data-structure
+.. tags:: c, linked-list
+
+*******
+Perface
+*******
+
+Well, I'm starting to work through 
+`Data Structures and Algorithm Analysis in C (2nd edition) <https://www.amazon.com/Data-Structures-Algorithm-Analysis-2nd/dp/0201498405>`_
+a couple of months agao to serve with two purposes:
+
+- to get enough familarity with C programming language
+- to keep my computer science foundation knowledge fresh
+
+I work on DB2 codebase but I don't play around the material I mentioned above a lot. 
+Things can get rusty pretty quickly. So, I need a way to keep fresh.
+
+.. important::
+
+    All the source code relates to this book can be found on `my git repo <https://github.com/xxks-kkk/algo>`_
+
+********
+Solution
+********
+
+When I try to work through the linked list related questions in Chapter 2, the first thing 
+I need to do is to able to verify my solution. I need to figure out a way to quickly 
+generate a test linked list. So, that's what ``List initializeList(ET A[], int arrayLen);`` for.
+
+.. code-block:: c
+   :linenos:
+
+    static List
+    initializeNoHeaderList(ET A[], int arrayLen)
+    {
+      int i = 0;
+      Pos tmpNode;;
+
+      if (arrayLen == 0)
+      {
+        return NULL;
+      }
+      tmpNode = malloc(sizeof(struct Node));
+      if (tmpNode == NULL)
+      {
+        exit(EXIT_FAILURE);
+      }
+      tmpNode->Element = A[i];
+      tmpNode->Next = initializeNoHeaderList(A+1, arrayLen-1);
+      return tmpNode;
+    }
+
+    List
+    initializeList(ET A[], int arrayLen)
+    {
+      Pos header;
+
+      header = malloc(sizeof(struct Node));
+      if (header == NULL)
+      {
+        exit(EXIT_FAILURE);
+      }
+      header->Next = initializeNoHeaderList(A, arrayLen);
+      return header;
+    }
+
+``initializeList`` adds a dummy node and invokes ``initializeNoHeaderList`` to 
+actually generate linked list from a given array. Inside ``initializeNoHeaderList``,
+we use *recursion* to generate the list from array.
+
+.. note::
+
+    If we actually change ``tmpNode->Next = initializeNoHeaderList(A+1, arrayLen-1);``
+    to ``tmpNode->Next = initializeList(A+1, arrayLen-1);``, this can lead to 
+    a list contains nodes alternate between actual data node and the dummy node. 
+    (i.e. ``ET test_arr[] = {23, 44, 45, 57, 89, -1};`` then the generated linked list
+    will be ``23->0->44->0->45->0->57->0->89->0->-1->0->``)
+
+**********
+C related
+**********
+
+- During the recursion call in ``initializeNoHeaderList``, we need to 
+  pass in the subarray and the updated length. You can do so like I do
+  ``A+1`` for the subarray (first element will be the second element of 
+  the original array) and ``arrayLen-1`` for the updated length.
+
+  For some reason, ``arrayLen--`` doesn't work here. If you do so, it 
+  will lead to infinite recursion call and segmentation fault eventually.
+
+  .. note::
+
+    when array being passed to a function call, it actually got decayed into a 
+    pointer pointing to the first element of array. So, 
+    ``initializeNoHeaderList(ET A[], int arrayLen)`` and ``initializeNoHeaderList(ET *A, int arrayLen)``
+    are the same.
+
+    Since when we pass in an array, essentially we pass in the pointer to the first element.
+    So, similarly, when we pass in the subarray, we can actually pass in the pointer pointing
+    to the first element of the subarray, which is the second element of the original array.
+    So, ``&A[1]`` (A[1] gives us the element, and we need a pointer, so we use ``&``). Since,
+    ``array[index]`` is the same as ``*(array+index)``, so ``&A[1]`` is the same as
+    ``&*(A+1)``, which is ``A+1``
+
+- to use ``exit`` function, you need ``#include <stdlib.h>``
+
+- Don't forget about ``;`` during ``struct`` definition. Otherwise, you can get 
+  ``error: two or more data types in declaration specifiers``
+
+- We use ``static`` for ``initializeNoHeaderList`` to make the function only visible 
+  to the file we implement it (i.e. ``main.c``). This is the way we keep a helper function
+  private.
+
+- For include guards (i.e. ``#ifndef``, ``#define``), read `this nice post <http://www.cprogramming.com/tutorial/cpreprocessor.html>`_
+
+.. include:: comment.rst

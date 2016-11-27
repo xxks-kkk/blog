@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html><!--[if lt IE 7]>      <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Part of Zeyuan's Documentation that is ready to the public">
+        <meta name="viewport" content="width=device-width">
+        <title>Generate a Linked List from a given array &mdash; Tech Stuff</title>
+            <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/tinkerturquoise.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+            <link rel="stylesheet" href="../../../_static/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="../../../_static/jessie.css" type="text/css" /><link rel="shortcut icon" href="../../../_static/tinkerer.ico" /><!-- Load modernizr and JQuery -->
+        <script src="../../../_static/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="../../../_static/plugins.js"></script>
+        <script src="../../../_static/main.js"></script>
+        <link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Automatically publish Tinkerer bld output to GitHub with Travis CI" href="automatically_publish_tinkerer_bld_output_to_github_with_travis_ci.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script><script type="text/javascript" src="../../../_static/underscore.js"></script><script type="text/javascript" src="../../../_static/doctools.js"></script><script type="text/javascript" src="../../../_static/disqus.js"></script></head>
+    <body role="document">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+      <div id="container">
+  <header role="banner">
+            <hgroup>
+              <h1><a href="../../../index.html">Tech Stuff</a></h1><h2>a tmp place to rest</h2></hgroup>
+          </header>
+      
+  <nav>
+    <ul><li class="quicklink"><div class="rss">
+        <a href="../../../rss.html" title="Subscribe via RSS"><span class="fa fa-lg fa-rss"></span></a>
+    </div></li><li class="main-nav">
+          <a href="../../../index.html">Home</a>
+        </li>
+      <li class="main-nav">
+          <a href="../../../pages/about.html">About</a>
+        </li>
+      <li>
+          <a href="../../../archive.html">Archives</a>
+        </li>
+    </ul>
+  </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>November 27, 2016</span>
+        </div>
+    <div class="section" id="generate-a-linked-list-from-a-given-array">
+<h1>Generate a Linked List from a given array</h1>
+<div class="section" id="perface">
+<h2>Perface</h2>
+<p>Well, I&#8217;m starting to work through
+<a class="reference external" href="https://www.amazon.com/Data-Structures-Algorithm-Analysis-2nd/dp/0201498405">Data Structures and Algorithm Analysis in C (2nd edition)</a>
+a couple of months agao to serve with two purposes:</p>
+<ul class="simple">
+<li>to get enough familarity with C programming language</li>
+<li>to keep my computer science foundation knowledge fresh</li>
+</ul>
+<p>I work on DB2 codebase but I don&#8217;t play around the material I mentioned above a lot.
+Things can get rusty pretty quickly. So, I need a way to keep fresh.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">All the source code relates to this book can be found on <a class="reference external" href="https://github.com/xxks-kkk/algo">my git repo</a></p>
+</div>
+</div>
+<div class="section" id="solution">
+<h2>Solution</h2>
+<p>When I try to work through the linked list related questions in Chapter 2, the first thing
+I need to do is to able to verify my solution. I need to figure out a way to quickly
+generate a test linked list. So, that&#8217;s what <span class="docutils literal"><span class="pre">List</span> <span class="pre">initializeList(ET</span> <span class="pre">A[],</span> <span class="pre">int</span> <span class="pre">arrayLen);</span></span> for.</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="k">static</span> <span class="n">List</span>
+ <span class="nf">initializeNoHeaderList</span><span class="p">(</span><span class="n">ET</span> <span class="n">A</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">arrayLen</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="n">Pos</span> <span class="n">tmpNode</span><span class="p">;;</span>
+
+   <span class="k">if</span> <span class="p">(</span><span class="n">arrayLen</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+   <span class="p">{</span>
+     <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="n">tmpNode</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Node</span><span class="p">));</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">tmpNode</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+   <span class="p">{</span>
+     <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+   <span class="p">}</span>
+   <span class="n">tmpNode</span><span class="o">-&gt;</span><span class="n">Element</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+   <span class="n">tmpNode</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">initializeNoHeaderList</span><span class="p">(</span><span class="n">A</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">arrayLen</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+   <span class="k">return</span> <span class="n">tmpNode</span><span class="p">;</span>
+ <span class="p">}</span>
+
+ <span class="n">List</span>
+ <span class="nf">initializeList</span><span class="p">(</span><span class="n">ET</span> <span class="n">A</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">arrayLen</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="n">Pos</span> <span class="n">header</span><span class="p">;</span>
+
+   <span class="n">header</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Node</span><span class="p">));</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">header</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+   <span class="p">{</span>
+     <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+   <span class="p">}</span>
+   <span class="n">header</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">initializeNoHeaderList</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">arrayLen</span><span class="p">);</span>
+   <span class="k">return</span> <span class="n">header</span><span class="p">;</span>
+ <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><span class="docutils literal"><span class="pre">initializeList</span></span> adds a dummy node and invokes <span class="docutils literal"><span class="pre">initializeNoHeaderList</span></span> to
+actually generate linked list from a given array. Inside <span class="docutils literal"><span class="pre">initializeNoHeaderList</span></span>,
+we use <em>recursion</em> to generate the list from array.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If we actually change <span class="docutils literal"><span class="pre">tmpNode-&gt;Next</span> <span class="pre">=</span> <span class="pre">initializeNoHeaderList(A+1,</span> <span class="pre">arrayLen-1);</span></span>
+to <span class="docutils literal"><span class="pre">tmpNode-&gt;Next</span> <span class="pre">=</span> <span class="pre">initializeList(A+1,</span> <span class="pre">arrayLen-1);</span></span>, this can lead to
+a list contains nodes alternate between actual data node and the dummy node.
+(i.e. <span class="docutils literal"><span class="pre">ET</span> <span class="pre">test_arr[]</span> <span class="pre">=</span> <span class="pre">{23,</span> <span class="pre">44,</span> <span class="pre">45,</span> <span class="pre">57,</span> <span class="pre">89,</span> <span class="pre">-1};</span></span> then the generated linked list
+will be <span class="docutils literal"><span class="pre">23-&gt;0-&gt;44-&gt;0-&gt;45-&gt;0-&gt;57-&gt;0-&gt;89-&gt;0-&gt;-1-&gt;0-&gt;</span></span>)</p>
+</div>
+</div>
+<div class="section" id="c-related">
+<h2>C related</h2>
+<ul>
+<li><p class="first">During the recursion call in <span class="docutils literal"><span class="pre">initializeNoHeaderList</span></span>, we need to
+pass in the subarray and the updated length. You can do so like I do
+<span class="docutils literal"><span class="pre">A+1</span></span> for the subarray (first element will be the second element of
+the original array) and <span class="docutils literal"><span class="pre">arrayLen-1</span></span> for the updated length.</p>
+<p>For some reason, <span class="docutils literal"><span class="pre">arrayLen--</span></span> doesn&#8217;t work here. If you do so, it
+will lead to infinite recursion call and segmentation fault eventually.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>when array being passed to a function call, it actually got decayed into a
+pointer pointing to the first element of array. So,
+<span class="docutils literal"><span class="pre">initializeNoHeaderList(ET</span> <span class="pre">A[],</span> <span class="pre">int</span> <span class="pre">arrayLen)</span></span> and <span class="docutils literal"><span class="pre">initializeNoHeaderList(ET</span> <span class="pre">*A,</span> <span class="pre">int</span> <span class="pre">arrayLen)</span></span>
+are the same.</p>
+<p class="last">Since when we pass in an array, essentially we pass in the pointer to the first element.
+So, similarly, when we pass in the subarray, we can actually pass in the pointer pointing
+to the first element of the subarray, which is the second element of the original array.
+So, <span class="docutils literal"><span class="pre">&amp;A[1]</span></span> (A[1] gives us the element, and we need a pointer, so we use <span class="docutils literal"><span class="pre">&amp;</span></span>). Since,
+<span class="docutils literal"><span class="pre">array[index]</span></span> is the same as <span class="docutils literal"><span class="pre">*(array+index)</span></span>, so <span class="docutils literal"><span class="pre">&amp;A[1]</span></span> is the same as
+<span class="docutils literal"><span class="pre">&amp;*(A+1)</span></span>, which is <span class="docutils literal"><span class="pre">A+1</span></span></p>
+</div>
+</li>
+<li><p class="first">to use <span class="docutils literal"><span class="pre">exit</span></span> function, you need <span class="docutils literal"><span class="pre">#include</span> <span class="pre">&lt;stdlib.h&gt;</span></span></p>
+</li>
+<li><p class="first">Don&#8217;t forget about <span class="docutils literal"><span class="pre">;</span></span> during <span class="docutils literal"><span class="pre">struct</span></span> definition. Otherwise, you can get
+<span class="docutils literal"><span class="pre">error:</span> <span class="pre">two</span> <span class="pre">or</span> <span class="pre">more</span> <span class="pre">data</span> <span class="pre">types</span> <span class="pre">in</span> <span class="pre">declaration</span> <span class="pre">specifiers</span></span></p>
+</li>
+<li><p class="first">We use <span class="docutils literal"><span class="pre">static</span></span> for <span class="docutils literal"><span class="pre">initializeNoHeaderList</span></span> to make the function only visible
+to the file we implement it (i.e. <span class="docutils literal"><span class="pre">main.c</span></span>). This is the way we keep a helper function
+private.</p>
+</li>
+<li><p class="first">For include guards (i.e. <span class="docutils literal"><span class="pre">#ifndef</span></span>, <span class="docutils literal"><span class="pre">#define</span></span>), read <a class="reference external" href="http://www.cprogramming.com/tutorial/cpreprocessor.html">this nice post</a></p>
+</li>
+</ul>
+</div>
+</div>
+
+    <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeyuan Hu</span>
+        </div>
+        <div class="categories">
+            <span>
+                Filed under:
+                <a href="../../../categories/c.html">c</a>, <a href="../../../categories/data_structure.html">data-structure</a></span>
+        </div>
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="../../../tags/c.html">c</a>, <a href="../../../tags/linked_list.html">linked-list</a></span>
+        </div>
+        </div>
+    <ul class="related clearfix">
+            <li class="left"></li>
+            <li class="right"><a href="automatically_publish_tinkerer_bld_output_to_github_with_travis_ci.html">Automatically publish Tinkerer bld output to GitHub with Travis CI</a> &raquo; </li>
+        </ul></article><aside class="sidebar"><section><div class="widget">
+    <h1>Recent Posts</h1>
+    <ul><li>
+            <a href="#">Generate a Linked List from a given array</a>
+        </li><li>
+            <a href="automatically_publish_tinkerer_bld_output_to_github_with_travis_ci.html">Automatically publish Tinkerer bld output to GitHub with Travis CI</a>
+        </li><li>
+            <a href="../23/hello_world.html">Hello World</a>
+        </li></ul>
+</div>
+</section><section><div class="widget">
+    <h1>Categories</h1>
+    <ul><li><a href="../../../categories/c.html">c</a> (1)</li><li><a href="../../../categories/data_structure.html">data-structure</a> (1)</li><li><a href="../../../categories/github.html">github</a> (1)</li><li><a href="../../../categories/misc.html">misc</a> (1)</li><li><a href="../../../categories/travis_ci.html">travis-ci</a> (1)</li></ul>
+</div></section><section><div class="widget">
+    <h1>Tags Cloud</h1>
+      <a href="../../../tags/c.html" style="font-size: 8pt">c</a>&nbsp;&nbsp;
+      <a href="../../../tags/github.html" style="font-size: 8pt">github</a>&nbsp;&nbsp;
+      <a href="../../../tags/linked_list.html" style="font-size: 8pt">linked-list</a>&nbsp;&nbsp;
+      <a href="../../../tags/meta.html" style="font-size: 8pt">meta</a>&nbsp;&nbsp;
+      <a href="../../../tags/travis_ci.html" style="font-size: 8pt">travis-ci</a>
+</div></section><section><div class="widget" id="searchbox" role="search">
+    <h1><a href="#searchbox">Search</a></h1>
+    <form action="../../../search.html" method="get">
+        <input type="text" name="q" />
+        <button type="submit"><span class="fa fa-search"></span></button>
+    </form>
+</div></section></aside></div> <!-- #main --></div> <!-- #main-container -->
+
+        <div class="footer-container" role="contentinfo"><footer class="wrapper">&copy; Copyright 2016, Zeyuan Hu. Powered by <a href="http://www.tinkerer.me/" target="_blank">Tinkerer</a> and <a href="http://sphinx.pocoo.org/" target="_blank">Sphinx</a>. <a href="https://pypi.python.org/pypi/sphinxjp.themes.tinkerturquoise" target="_blank">This theme</a> is originally designed by <a href="http://naoiwata.github.com/" target="_blank">naoiwata</a>.</footer>
+  <script type="text/javascript">
+    var FixZoom,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+    FixZoom = (function() {
+      var ua;
+      ua = window.navigator.userAgent.toLowerCase();
+
+      function FixZoom() {
+        this.on_resize = __bind(this.on_resize, this);
+        this.dom_id = 'wrap';
+        this.max_width = 640;
+        this.device_width = null;
+        this.device_height = null;
+        this.window_width = window.innerWidth;
+        this.window_height = window.innerHeight;
+        this.iphone = ua.indexOf('iphone') > -1;
+        this.ipod = ua.indexOf('ipod') > -1;
+        this.ipad = ua.indexOf('ipad') > -1;
+        this.android = ua.indexOf('android') > -1;
+      }
+
+      FixZoom.prototype.init = function(dom_id, max) {
+        var _this = this;
+        this.dom_id = dom_id;
+        if (max > 0) {
+          this.max_width = max;
+        }
+        setTimeout(function() {
+          window.scrollTo(0, 1);
+          return _this.on_resize();
+        }, 100);
+        this.set_ua();
+        this.on_resize();
+        window.addEventListener('resize', this.on_resize);
+      };
+
+      FixZoom.prototype.on_resize = function() {
+        var wrapper;
+        if (!this.iphone && !this.ipod && !this.android) {
+          return;
+        }
+        this.window_width = window.innerWidth;
+        wrapper = document.getElementById(this.dom_id);
+        if (this.window_width >= this.max_width) {
+          wrapper.style.width = this.max_width + 'px';
+          wrapper.style.margin = '0 auto';
+        } else {
+          wrapper.style.zoom = this.window_width / this.max_width;
+        }
+      };
+
+      FixZoom.prototype.set_ua = function() {
+        if (this.iphone || this.android || this.ipad || this.ipod) {
+          document.body.className += ' sp';
+        } else {
+          document.body.className += ' pc';
+        }
+      };
+
+      return FixZoom;
+
+    })();
+
+    window.fix_zoom = new FixZoom();
+    $('head').append('<meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" name="viewport" />');
+    fix_zoom.init('container', 640);
+  </script></div> <!-- footer-container -->
+
+      </div> <!--! end of #container --><script type="text/javascript">    var disqus_shortname = "blog-ofbswlmyer";    disqus_count();</script><!--[if lt IE 7 ]>
+          <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+          <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+        <![endif]-->
+    </body>
+</html>

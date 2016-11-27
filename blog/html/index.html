@@ -67,6 +67,158 @@
             <span>November 27, 2016</span>
         </div>
         <div class="section">
+            <h1><a href="2016/11/27/maw-001.html">Generate a Linked List from a given array</a></h1>
+<div class="section" id="perface">
+<h2>Perface</h2>
+<p>Well, I’m starting to work through
+<a class="reference external" href="https://www.amazon.com/Data-Structures-Algorithm-Analysis-2nd/dp/0201498405">Data Structures and Algorithm Analysis in C (2nd edition)</a>
+a couple of months agao to serve with two purposes:</p>
+<ul class="simple"><li>to get enough familarity with C programming language</li>
+<li>to keep my computer science foundation knowledge fresh</li>
+</ul><p>I work on DB2 codebase but I don’t play around the material I mentioned above a lot.
+Things can get rusty pretty quickly. So, I need a way to keep fresh.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">All the source code relates to this book can be found on <a class="reference external" href="https://github.com/xxks-kkk/algo">my git repo</a></p>
+</div>
+</div>
+<div class="section" id="solution">
+<h2>Solution</h2>
+<p>When I try to work through the linked list related questions in Chapter 2, the first thing
+I need to do is to able to verify my solution. I need to figure out a way to quickly
+generate a test linked list. So, that’s what <span class="docutils literal"><span class="pre">List</span> <span class="pre">initializeList(ET</span> <span class="pre">A[],</span> <span class="pre">int</span> <span class="pre">arrayLen);</span></span> for.</p>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33</pre></div></td><td class="code"><div class="highlight"><pre><span/> <span class="k">static</span> <span class="n">List</span>
+ <span class="nf">initializeNoHeaderList</span><span class="p">(</span><span class="n">ET</span> <span class="n">A</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">arrayLen</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="n">Pos</span> <span class="n">tmpNode</span><span class="p">;;</span>
+
+   <span class="k">if</span> <span class="p">(</span><span class="n">arrayLen</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+   <span class="p">{</span>
+     <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="n">tmpNode</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Node</span><span class="p">));</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">tmpNode</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+   <span class="p">{</span>
+     <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+   <span class="p">}</span>
+   <span class="n">tmpNode</span><span class="o">-&gt;</span><span class="n">Element</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+   <span class="n">tmpNode</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">initializeNoHeaderList</span><span class="p">(</span><span class="n">A</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">arrayLen</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+   <span class="k">return</span> <span class="n">tmpNode</span><span class="p">;</span>
+ <span class="p">}</span>
+
+ <span class="n">List</span>
+ <span class="nf">initializeList</span><span class="p">(</span><span class="n">ET</span> <span class="n">A</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">arrayLen</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="n">Pos</span> <span class="n">header</span><span class="p">;</span>
+
+   <span class="n">header</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Node</span><span class="p">));</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">header</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+   <span class="p">{</span>
+     <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+   <span class="p">}</span>
+   <span class="n">header</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">initializeNoHeaderList</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">arrayLen</span><span class="p">);</span>
+   <span class="k">return</span> <span class="n">header</span><span class="p">;</span>
+ <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p><span class="docutils literal"><span class="pre">initializeList</span></span> adds a dummy node and invokes <span class="docutils literal"><span class="pre">initializeNoHeaderList</span></span> to
+actually generate linked list from a given array. Inside <span class="docutils literal"><span class="pre">initializeNoHeaderList</span></span>,
+we use <em>recursion</em> to generate the list from array.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If we actually change <span class="docutils literal"><span class="pre">tmpNode-&gt;Next</span> <span class="pre">=</span> <span class="pre">initializeNoHeaderList(A+1,</span> <span class="pre">arrayLen-1);</span></span>
+to <span class="docutils literal"><span class="pre">tmpNode-&gt;Next</span> <span class="pre">=</span> <span class="pre">initializeList(A+1,</span> <span class="pre">arrayLen-1);</span></span>, this can lead to
+a list contains nodes alternate between actual data node and the dummy node.
+(i.e. <span class="docutils literal"><span class="pre">ET</span> <span class="pre">test_arr[]</span> <span class="pre">=</span> <span class="pre">{23,</span> <span class="pre">44,</span> <span class="pre">45,</span> <span class="pre">57,</span> <span class="pre">89,</span> <span class="pre">-1};</span></span> then the generated linked list
+will be <span class="docutils literal"><span class="pre">23-&gt;0-&gt;44-&gt;0-&gt;45-&gt;0-&gt;57-&gt;0-&gt;89-&gt;0-&gt;-1-&gt;0-&gt;</span></span>)</p>
+</div>
+</div>
+<div class="section" id="c-related">
+<h2>C related</h2>
+<ul><li><p class="first">During the recursion call in <span class="docutils literal"><span class="pre">initializeNoHeaderList</span></span>, we need to
+pass in the subarray and the updated length. You can do so like I do
+<span class="docutils literal"><span class="pre">A+1</span></span> for the subarray (first element will be the second element of
+the original array) and <span class="docutils literal"><span class="pre">arrayLen-1</span></span> for the updated length.</p>
+<p>For some reason, <span class="docutils literal"><span class="pre">arrayLen--</span></span> doesn’t work here. If you do so, it
+will lead to infinite recursion call and segmentation fault eventually.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>when array being passed to a function call, it actually got decayed into a
+pointer pointing to the first element of array. So,
+<span class="docutils literal"><span class="pre">initializeNoHeaderList(ET</span> <span class="pre">A[],</span> <span class="pre">int</span> <span class="pre">arrayLen)</span></span> and <span class="docutils literal"><span class="pre">initializeNoHeaderList(ET</span> <span class="pre">*A,</span> <span class="pre">int</span> <span class="pre">arrayLen)</span></span>
+are the same.</p>
+<p class="last">Since when we pass in an array, essentially we pass in the pointer to the first element.
+So, similarly, when we pass in the subarray, we can actually pass in the pointer pointing
+to the first element of the subarray, which is the second element of the original array.
+So, <span class="docutils literal"><span class="pre">&amp;A[1]</span></span> (A[1] gives us the element, and we need a pointer, so we use <span class="docutils literal"><span class="pre">&amp;</span></span>). Since,
+<span class="docutils literal"><span class="pre">array[index]</span></span> is the same as <span class="docutils literal"><span class="pre">*(array+index)</span></span>, so <span class="docutils literal"><span class="pre">&amp;A[1]</span></span> is the same as
+<span class="docutils literal"><span class="pre">&amp;*(A+1)</span></span>, which is <span class="docutils literal"><span class="pre">A+1</span></span></p>
+</div>
+</li>
+<li><p class="first">to use <span class="docutils literal"><span class="pre">exit</span></span> function, you need <span class="docutils literal"><span class="pre">#include</span> <span class="pre">&lt;stdlib.h&gt;</span></span></p>
+</li>
+<li><p class="first">Don’t forget about <span class="docutils literal"><span class="pre">;</span></span> during <span class="docutils literal"><span class="pre">struct</span></span> definition. Otherwise, you can get
+<span class="docutils literal"><span class="pre">error:</span> <span class="pre">two</span> <span class="pre">or</span> <span class="pre">more</span> <span class="pre">data</span> <span class="pre">types</span> <span class="pre">in</span> <span class="pre">declaration</span> <span class="pre">specifiers</span></span></p>
+</li>
+<li><p class="first">We use <span class="docutils literal"><span class="pre">static</span></span> for <span class="docutils literal"><span class="pre">initializeNoHeaderList</span></span> to make the function only visible
+to the file we implement it (i.e. <span class="docutils literal"><span class="pre">main.c</span></span>). This is the way we keep a helper function
+private.</p>
+</li>
+<li><p class="first">For include guards (i.e. <span class="docutils literal"><span class="pre">#ifndef</span></span>, <span class="docutils literal"><span class="pre">#define</span></span>), read <a class="reference external" href="http://www.cprogramming.com/tutorial/cpreprocessor.html">this nice post</a></p>
+</li>
+</ul></div>
+        </div>
+        <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeyuan Hu</span>
+        </div>
+        <div class="categories">
+            <span>
+                Filed under:
+                <a href="categories/c.html">c</a>, <a href="categories/data_structure.html">data-structure</a></span>
+        </div>
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="tags/c.html">c</a>, <a href="tags/linked_list.html">linked-list</a></span>
+        </div>
+        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
+            <span>November 27, 2016</span>
+        </div>
+        <div class="section">
             <span id="travis-gitpage"/><h1><a href="2016/11/27/automatically_publish_tinkerer_bld_output_to_github_with_travis_ci.html">Automatically publish Tinkerer bld output to GitHub with Travis CI</a></h1>
 <div class="section" id="perface">
 <h2>Perface</h2>
@@ -264,6 +416,8 @@ s.setAttribute('data-timestamp', +new Date());
     </div></article><aside class="sidebar"><section><div class="widget">
     <h1>Recent Posts</h1>
     <ul><li>
+            <a href="2016/11/27/maw-001.html">Generate a Linked List from a given array</a>
+        </li><li>
             <a href="2016/11/27/automatically_publish_tinkerer_bld_output_to_github_with_travis_ci.html">Automatically publish Tinkerer bld output to GitHub with Travis CI</a>
         </li><li>
             <a href="2016/11/23/hello_world.html">Hello World</a>
@@ -271,10 +425,12 @@ s.setAttribute('data-timestamp', +new Date());
 </div>
 </section><section><div class="widget">
     <h1>Categories</h1>
-    <ul><li><a href="categories/github.html">github</a> (1)</li><li><a href="categories/misc.html">misc</a> (1)</li><li><a href="categories/travis_ci.html">travis-ci</a> (1)</li></ul>
+    <ul><li><a href="categories/c.html">c</a> (1)</li><li><a href="categories/data_structure.html">data-structure</a> (1)</li><li><a href="categories/github.html">github</a> (1)</li><li><a href="categories/misc.html">misc</a> (1)</li><li><a href="categories/travis_ci.html">travis-ci</a> (1)</li></ul>
 </div></section><section><div class="widget">
     <h1>Tags Cloud</h1>
+      <a href="tags/c.html" style="font-size: 8pt">c</a>&nbsp;&nbsp;
       <a href="tags/github.html" style="font-size: 8pt">github</a>&nbsp;&nbsp;
+      <a href="tags/linked_list.html" style="font-size: 8pt">linked-list</a>&nbsp;&nbsp;
       <a href="tags/meta.html" style="font-size: 8pt">meta</a>&nbsp;&nbsp;
       <a href="tags/travis_ci.html" style="font-size: 8pt">travis-ci</a>
 </div></section><section><div class="widget" id="searchbox" role="search">
