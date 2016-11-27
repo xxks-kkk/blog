@@ -30,12 +30,36 @@ Things can get rusty pretty quickly. So, I need a way to keep fresh.
 Solution
 ********
 
+For completeness and readability, here is my basic node declaraiton and definition.
+
+.. code-block:: c
+
+    typedef int ET; // ET shorts for "ElementType"
+
+    // we always assume there is a dummy node at the very beginning
+    // of the list.
+    #ifndef _LINKED_LIST_H
+    #define _LINKED_LIST_H
+
+    struct Node;
+    typedef struct Node *PtrToNode;
+    typedef PtrToNode List;
+    typedef PtrToNode Pos;
+
+    #endif
+
+    // placed in the implementation file
+    struct Node
+    {
+      ET Element;
+      Pos Next;
+    };
+
 When I try to work through the linked list related questions in Chapter 2, the first thing 
 I need to do is to able to verify my solution. I need to figure out a way to quickly 
 generate a test linked list. So, that's what ``List initializeList(ET A[], int arrayLen);`` for.
 
 .. code-block:: c
-   :linenos:
 
     static List
     initializeNoHeaderList(ET A[], int arrayLen)
@@ -120,4 +144,4 @@ C related
 
 - For include guards (i.e. ``#ifndef``, ``#define``), read `this nice post <http://www.cprogramming.com/tutorial/cpreprocessor.html>`_
 
-.. include:: comment.rst
+.. include:: /comment.rst
