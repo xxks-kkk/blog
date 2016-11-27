@@ -57,7 +57,7 @@ For completeness and readability, here is my basic node declaraiton and definiti
 
 When I try to work through the linked list related questions in Chapter 2, the first thing 
 I need to do is to able to verify my solution. I need to figure out a way to quickly 
-generate a test linked list. So, that's what ``List initializeList(ET A[], int arrayLen);`` for.
+generate a test linked list. So, that's what :code:`List initializeList(ET A[], int arrayLen);` for.
 
 .. code-block:: c
 
@@ -101,10 +101,10 @@ we use *recursion* to generate the list from array.
 
 .. note::
 
-    If we actually change ``tmpNode->Next = initializeNoHeaderList(A+1, arrayLen-1);``
-    to ``tmpNode->Next = initializeList(A+1, arrayLen-1);``, this can lead to 
+    If we actually change :code:`tmpNode->Next = initializeNoHeaderList(A+1, arrayLen-1);`
+    to :code:`tmpNode->Next = initializeList(A+1, arrayLen-1);`, this can lead to 
     a list contains nodes alternate between actual data node and the dummy node. 
-    (i.e. ``ET test_arr[] = {23, 44, 45, 57, 89, -1};`` then the generated linked list
+    (i.e. :code:`ET test_arr[] = {23, 44, 45, 57, 89, -1};` then the generated linked list
     will be ``23->0->44->0->45->0->57->0->89->0->-1->0->``)
 
 **********
@@ -136,7 +136,7 @@ C related
 - to use ``exit`` function, you need ``#include <stdlib.h>``
 
 - Don't forget about ``;`` during ``struct`` definition. Otherwise, you can get 
-  ``error: two or more data types in declaration specifiers``
+  "error: two or more data types in declaration specifiers"
 
 - We use ``static`` for ``initializeNoHeaderList`` to make the function only visible 
   to the file we implement it (i.e. ``main.c``). This is the way we keep a helper function
