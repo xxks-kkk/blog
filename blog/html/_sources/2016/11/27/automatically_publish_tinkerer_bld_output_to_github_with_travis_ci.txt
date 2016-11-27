@@ -66,7 +66,7 @@ the second link's bottom script offers some intuition.
 
 I'm not going to redo the work. I just want to point out something you need to be careful:
 
-- **DO NOT using personal token.** As mentioned by the first link, using a GitHub personal
+- **DO NOT use personal token.** As mentioned by the first link, using a GitHub personal
   access token offers the full access to all your git repo. That's a very high risk.
 
 - **Be Careful with Public/Private.** You need to use the Travis client to encrypt 
