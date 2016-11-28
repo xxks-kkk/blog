@@ -5,8 +5,8 @@ MAW 3.2
 #######
 
 .. author:: default
-.. categories:: c, data-structure
-.. tags:: c, linked-list
+.. categories:: c, data-structure, linked-list
+.. tags:: c, singly-linked-list
 
 *******
 Problem
