@@ -14,7 +14,7 @@ Perface
 
 Well, I'm starting to work through 
 `Data Structures and Algorithm Analysis in C (2nd edition) <https://www.amazon.com/Data-Structures-Algorithm-Analysis-2nd/dp/0201498405>`_
-a couple of months agao to serve with two purposes:
+(referenced as MAW in the following posts) a couple of months agao to serve with two purposes:
 
 - to get enough familarity with C programming language
 - to keep my computer science foundation knowledge fresh
