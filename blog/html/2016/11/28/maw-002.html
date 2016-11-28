@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html><!--[if lt IE 7]>      <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Part of Zeyuan's Documentation that is ready to the public">
+        <meta name="viewport" content="width=device-width">
+        <title>MAW 3.2 &mdash; Tech Stuff</title>
+            <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/tinkerturquoise.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+            <link rel="stylesheet" href="../../../_static/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="../../../_static/jessie.css" type="text/css" /><link rel="shortcut icon" href="../../../_static/tinkerer.ico" /><!-- Load modernizr and JQuery -->
+        <script src="../../../_static/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="../../../_static/plugins.js"></script>
+        <script src="../../../_static/main.js"></script>
+        <link rel="search" title="Search" href="../../../search.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script><script type="text/javascript" src="../../../_static/underscore.js"></script><script type="text/javascript" src="../../../_static/doctools.js"></script><script type="text/javascript" src="../../../_static/disqus.js"></script></head>
+    <body role="document">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+      <div id="container">
+  <header role="banner">
+            <hgroup>
+              <h1><a href="../../../index.html">Tech Stuff</a></h1><h2>a tmp place to rest</h2></hgroup>
+          </header>
+      
+  <nav>
+    <ul><li class="quicklink"><div class="rss">
+        <a href="../../../rss.html" title="Subscribe via RSS"><span class="fa fa-lg fa-rss"></span></a>
+    </div></li><li class="main-nav">
+          <a href="../../../index.html">Home</a>
+        </li>
+      <li class="main-nav">
+          <a href="../../../pages/about.html">About</a>
+        </li>
+      <li>
+          <a href="../../../archive.html">Archives</a>
+        </li>
+    </ul>
+  </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>November 28, 2016</span>
+        </div>
+    <div class="section" id="maw-3-2">
+<span id="maw-002-rst"></span><h1>MAW 3.2</h1>
+<div class="section" id="problem">
+<h2>Problem</h2>
+<p>Today, I finished the problem 3.2. The question is following:</p>
+<blockquote>
+<div>You are given a linked list, L, and another linked list, P, containing
+integers sorted in ascending order. The operation <span class="docutils literal"><span class="pre">PrintLots(L,P)</span></span>
+will print the elements in L that are in positions specified by P.
+For instance, if P = 1,3,4,6, the first, third, fourth, and sixth elements
+in L are printed. Write the procedure <span class="docutils literal"><span class="pre">PrintLots(L,P)</span></span>. You should
+use the basic list operations. What is the running time of your procedure?</div></blockquote>
+</div>
+<div class="section" id="solution">
+<h2>Solution</h2>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kt">void</span>
+ <span class="nf">printLots</span><span class="p">(</span><span class="n">List</span> <span class="n">L</span><span class="p">,</span> <span class="n">List</span> <span class="n">P</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="n">Pos</span> <span class="n">dummyP</span><span class="p">,</span> <span class="n">dummyL</span><span class="p">;</span> <span class="c1">// creates dummy nodes to traverse the list</span>
+   <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">outofelement</span><span class="p">;</span>
+
+   <span class="n">dummyP</span> <span class="o">=</span> <span class="n">P</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+   <span class="n">dummyL</span> <span class="o">=</span> <span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+
+   <span class="k">while</span> <span class="p">(</span><span class="n">dummyP</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+   <span class="p">{</span>
+     <span class="n">idx</span> <span class="o">=</span> <span class="n">dummyP</span><span class="o">-&gt;</span><span class="n">Element</span><span class="p">;</span>
+     <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+     <span class="p">{</span>
+       <span class="c1">// if the idx is larger or equal to where the dummyL currently is</span>
+       <span class="c1">// we don&#39;t want to reset the dummyL to the very beginning of</span>
+       <span class="c1">// the list L again to redo the traverse.</span>
+       <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">)</span>
+       <span class="p">{</span>
+         <span class="n">dummyL</span> <span class="o">=</span> <span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+         <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+       <span class="p">}</span>
+       <span class="k">for</span><span class="p">(;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">idx</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+       <span class="p">{</span>
+         <span class="k">if</span> <span class="p">(</span><span class="n">dummyL</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+         <span class="p">{</span>
+           <span class="n">dummyL</span> <span class="o">=</span> <span class="n">dummyL</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+         <span class="p">}</span>
+         <span class="k">else</span>
+         <span class="p">{</span>
+           <span class="n">outofelement</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+           <span class="k">break</span><span class="p">;</span>
+         <span class="p">}</span>
+       <span class="p">}</span>
+       <span class="k">if</span> <span class="p">(</span><span class="n">outofelement</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+       <span class="p">{</span>
+         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;No element in position %d, &quot;</span><span class="p">,</span> <span class="n">idx</span><span class="p">);</span>
+       <span class="p">}</span>
+       <span class="k">else</span><span class="p">{</span>
+         <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d, &quot;</span><span class="p">,</span> <span class="n">dummyL</span><span class="o">-&gt;</span><span class="n">Element</span><span class="p">);</span>
+       <span class="p">}</span>
+     <span class="p">}</span>
+     <span class="k">else</span>
+     <span class="p">{</span>
+       <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+     <span class="p">}</span>
+     <span class="n">outofelement</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+     <span class="n">dummyP</span> <span class="o">=</span> <span class="n">dummyP</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+   <span class="p">}</span>
+ <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>The problem isn&#8217;t hard to solve. However, to get things right, I need to develop several test cases.
+Let&#8217;s develop a solution that can handle more general situation. In other words, linked list, P, doesn&#8217;t
+necessarily contain integers sorted in ascending order. Here are test cases I developed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">L</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="n">P</span><span class="p">:</span>  <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span>          <span class="o">&lt;---</span> <span class="n">normal</span> <span class="n">case</span>
+    <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span>          <span class="o">&lt;---</span> <span class="n">there</span> <span class="ow">is</span> <span class="n">no</span> <span class="n">sixth</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">L</span>
+    <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span>       <span class="o">&lt;---</span> <span class="n">there</span> <span class="ow">is</span> <span class="n">no</span> <span class="n">sixth</span><span class="p">,</span> <span class="n">seventh</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">L</span>
+    <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span>          <span class="o">&lt;---</span> <span class="n">there</span> <span class="ow">is</span> <span class="n">no</span> <span class="n">sixth</span><span class="p">,</span> <span class="n">seventh</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">L</span><span class="p">,</span> <span class="n">but</span> <span class="n">have</span> <span class="n">third</span><span class="p">,</span> <span class="n">first</span> <span class="n">element</span>
+    <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span>          <span class="o">&lt;---</span> <span class="n">a</span> <span class="n">no</span> <span class="n">element</span> <span class="p">(</span><span class="mi">6</span><span class="n">th</span><span class="p">)</span> <span class="n">followed</span> <span class="n">by</span> <span class="n">a</span> <span class="n">existing</span> <span class="n">element</span> <span class="p">(</span><span class="mi">2</span><span class="n">nd</span><span class="p">)</span>
+   <span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span>          <span class="o">&lt;---</span> <span class="n">negative</span> <span class="n">integer</span> <span class="kn">from</span> <span class="nn">P</span> <span class="n">appears</span> <span class="n">at</span> <span class="n">the</span> <span class="n">beginning</span>
+    <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span>        <span class="o">&lt;---</span> <span class="n">negative</span> <span class="n">integer</span> <span class="kn">from</span> <span class="nn">P</span> <span class="n">appears</span> <span class="n">at</span> <span class="n">the</span> <span class="n">end</span>
+</pre></div>
+</div>
+<p>The code presented above handles all these different situations. In addition, if the integers presented in P
+are actually in ascending order, we want to take advantage of this piece of information. That&#8217;s why we check
+<span class="docutils literal"><span class="pre">if</span> <span class="pre">(idx</span> <span class="pre">&lt;</span> <span class="pre">i)</span></span>. We don&#8217;t want to reset the traverse ptr (i.e. <span class="docutils literal"><span class="pre">dummyL</span></span>) every single time. In other words,
+if the number in P is actually ascending, we want to move the traver ptr from its current pos instead of reset.</p>
+</div>
+<div class="section" id="c-related">
+<h2>C related</h2>
+<ul class="simple">
+<li>When I compose this post, I&#8217;m actually thinking of if <span class="docutils literal"><span class="pre">if</span> <span class="pre">(idx</span> <span class="pre">&gt;=</span> <span class="pre">0)</span></span> is necessary. In other words, if C
+supports the array element access using negative index, then we shouldn&#8217;t use <span class="docutils literal"><span class="pre">exit</span></span> to handle.
+Luckily, C doesn&#8217;t support this feature. In fact, C allows you to access the element using negative index,
+but that is actually a out of bound access and C won&#8217;t complain about this. However, whate exactly you get
+is random. That is called &#8220;undefined behavior&#8221;.</li>
+</ul>
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_shortname = 'blog-ofbswlmyer';
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = '//blog-ofbswlmyer.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+</div>
+
+    <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeyuan Hu</span>
+        </div>
+        <div class="categories">
+            <span>
+                Filed under:
+                <a href="../../../categories/c.html">c</a>, <a href="../../../categories/data_structure.html">data-structure</a></span>
+        </div>
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="../../../tags/c.html">c</a>, <a href="../../../tags/linked_list.html">linked-list</a></span>
+        </div>
+        </div>
+    </article><aside class="sidebar"><section><div class="widget">
+    <h1>Recent Posts</h1>
+    <ul><li>
+            <a href="../27/maw-001.html">Generate a Linked List from a given array</a>
+        </li><li>
+            <a href="../27/automatically_publish_tinkerer_bld_output_to_github_with_travis_ci.html">Automatically publish Tinkerer bld output to GitHub with Travis CI</a>
+        </li><li>
+            <a href="../23/hello_world.html">Hello World</a>
+        </li></ul>
+</div>
+</section><section><div class="widget">
+    <h1>Categories</h1>
+    <ul><li><a href="../../../categories/c.html">c</a> (1)</li><li><a href="../../../categories/data_structure.html">data-structure</a> (1)</li><li><a href="../../../categories/github.html">github</a> (1)</li><li><a href="../../../categories/misc.html">misc</a> (1)</li><li><a href="../../../categories/travis_ci.html">travis-ci</a> (1)</li></ul>
+</div></section><section><div class="widget">
+    <h1>Tags Cloud</h1>
+      <a href="../../../tags/c.html" style="font-size: 8pt">c</a>&nbsp;&nbsp;
+      <a href="../../../tags/github.html" style="font-size: 8pt">github</a>&nbsp;&nbsp;
+      <a href="../../../tags/linked_list.html" style="font-size: 8pt">linked-list</a>&nbsp;&nbsp;
+      <a href="../../../tags/meta.html" style="font-size: 8pt">meta</a>&nbsp;&nbsp;
+      <a href="../../../tags/travis_ci.html" style="font-size: 8pt">travis-ci</a>
+</div></section><section><div class="widget" id="searchbox" role="search">
+    <h1><a href="#searchbox">Search</a></h1>
+    <form action="../../../search.html" method="get">
+        <input type="text" name="q" />
+        <button type="submit"><span class="fa fa-search"></span></button>
+    </form>
+</div></section></aside></div> <!-- #main --></div> <!-- #main-container -->
+
+        <div class="footer-container" role="contentinfo"><footer class="wrapper">&copy; Copyright 2016, Zeyuan Hu. Powered by <a href="http://www.tinkerer.me/" target="_blank">Tinkerer</a> and <a href="http://sphinx.pocoo.org/" target="_blank">Sphinx</a>. <a href="https://pypi.python.org/pypi/sphinxjp.themes.tinkerturquoise" target="_blank">This theme</a> is originally designed by <a href="http://naoiwata.github.com/" target="_blank">naoiwata</a>.</footer>
+  <script type="text/javascript">
+    var FixZoom,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+    FixZoom = (function() {
+      var ua;
+      ua = window.navigator.userAgent.toLowerCase();
+
+      function FixZoom() {
+        this.on_resize = __bind(this.on_resize, this);
+        this.dom_id = 'wrap';
+        this.max_width = 640;
+        this.device_width = null;
+        this.device_height = null;
+        this.window_width = window.innerWidth;
+        this.window_height = window.innerHeight;
+        this.iphone = ua.indexOf('iphone') > -1;
+        this.ipod = ua.indexOf('ipod') > -1;
+        this.ipad = ua.indexOf('ipad') > -1;
+        this.android = ua.indexOf('android') > -1;
+      }
+
+      FixZoom.prototype.init = function(dom_id, max) {
+        var _this = this;
+        this.dom_id = dom_id;
+        if (max > 0) {
+          this.max_width = max;
+        }
+        setTimeout(function() {
+          window.scrollTo(0, 1);
+          return _this.on_resize();
+        }, 100);
+        this.set_ua();
+        this.on_resize();
+        window.addEventListener('resize', this.on_resize);
+      };
+
+      FixZoom.prototype.on_resize = function() {
+        var wrapper;
+        if (!this.iphone && !this.ipod && !this.android) {
+          return;
+        }
+        this.window_width = window.innerWidth;
+        wrapper = document.getElementById(this.dom_id);
+        if (this.window_width >= this.max_width) {
+          wrapper.style.width = this.max_width + 'px';
+          wrapper.style.margin = '0 auto';
+        } else {
+          wrapper.style.zoom = this.window_width / this.max_width;
+        }
+      };
+
+      FixZoom.prototype.set_ua = function() {
+        if (this.iphone || this.android || this.ipad || this.ipod) {
+          document.body.className += ' sp';
+        } else {
+          document.body.className += ' pc';
+        }
+      };
+
+      return FixZoom;
+
+    })();
+
+    window.fix_zoom = new FixZoom();
+    $('head').append('<meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" name="viewport" />');
+    fix_zoom.init('container', 640);
+  </script></div> <!-- footer-container -->
+
+      </div> <!--! end of #container --><script type="text/javascript">    var disqus_shortname = "blog-ofbswlmyer";    disqus_count();</script><!--[if lt IE 7 ]>
+          <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+          <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+        <![endif]-->
+    </body>
+</html>
