@@ -1,0 +1,112 @@
+.. _maw-002.rst:
+
+#######
+MAW 3.2
+#######
+
+.. author:: default
+.. categories:: c, data-structure
+.. tags:: c, linked-list
+
+*******
+Problem
+*******
+       
+Today, I finished the problem 3.2. The question is following:
+
+  You are given a linked list, L, and another linked list, P, containing
+  integers sorted in ascending order. The operation ``PrintLots(L,P)``
+  will print the elements in L that are in positions specified by P.
+  For instance, if P = 1,3,4,6, the first, third, fourth, and sixth elements
+  in L are printed. Write the procedure ``PrintLots(L,P)``. You should
+  use the basic list operations. What is the running time of your procedure?
+
+********
+Solution
+********
+
+.. code-block:: c
+   :linenos:
+      
+    void
+    printLots(List L, List P)
+    {
+      Pos dummyP, dummyL; // creates dummy nodes to traverse the list
+      int i = 0, idx, outofelement;
+
+      dummyP = P->Next;
+      dummyL = L->Next;
+
+      while (dummyP != NULL)
+      {
+        idx = dummyP->Element;
+        if (idx >= 0)
+        {
+          // if the idx is larger or equal to where the dummyL currently is
+          // we don't want to reset the dummyL to the very beginning of
+          // the list L again to redo the traverse.
+          if (idx < i)
+          {
+            dummyL = L->Next;
+            i = 0;
+          }
+          for(; i < idx; i++)
+          {
+            if (dummyL->Next != NULL)
+            {
+              dummyL = dummyL->Next;
+            }
+            else
+            {
+              outofelement = 1;
+              break;
+            }
+          }
+          if (outofelement == 1)
+          {
+            printf("No element in position %d, ", idx);
+          }
+          else{
+            printf("%d, ", dummyL->Element);
+          }
+        }
+        else
+        {
+          exit(EXIT_FAILURE);
+        }
+        outofelement = 0;
+        dummyP = dummyP->Next;
+      }
+    }
+
+The problem isn't hard to solve. However, to get things right, I need to develop several test cases.
+Let's develop a solution that can handle more general situation. In other words, linked list, P, doesn't
+necessarily contain integers sorted in ascending order. Here are test cases I developed::
+
+  L: 23, 44, 45, 57, 89, -1
+
+  P:  1, 3, 4, 5          <--- normal case
+      1, 3, 4, 6          <--- there is no sixth element in L
+      1, 3, 4, 6, 7       <--- there is no sixth, seventh element in L
+      6, 7, 3, 1          <--- there is no sixth, seventh element in L, but have third, first element
+      6, 2, 7, 1          <--- a no element (6th) followed by a existing element (2nd)
+     -9, 1, 3, 4          <--- negative integer from P appears at the beginning
+      1, 2, 4, -10        <--- negative integer from P appears at the end
+
+The code presented above handles all these different situations. In addition, if the integers presented in P
+are actually in ascending order, we want to take advantage of this piece of information. That's why we check
+``if (idx < i)``. We don't want to reset the traverse ptr (i.e. ``dummyL``) every single time. In other words,
+if the number in P is actually ascending, we want to move the traver ptr from its current pos instead of reset.
+
+**********
+C related
+**********
+
+- When I compose this post, I'm actually thinking of if ``if (idx >= 0)`` is necessary. In other words, if C
+  supports the array element access using negative index, then we shouldn't use ``exit`` to handle.
+  Luckily, C doesn't support this feature. In fact, C allows you to access the element using negative index,
+  but that is actually a out of bound access and C won't complain about this. However, whate exactly you get
+  is random. That is called "undefined behavior".
+
+
+.. include:: /comment.rst
