@@ -1,12 +1,12 @@
-.. maw-001.rst:
+.. _maw-001.rst:
 
 ##########################################
 Generate a Linked List from a given array
 ##########################################
 
 .. author:: default
-.. categories:: c, data-structure
-.. tags:: c, linked-list
+.. categories:: c, data-structure, linked-list
+.. tags:: c, singly-linked-list
 
 *******
 Perface
