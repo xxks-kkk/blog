@@ -145,7 +145,7 @@ front of the list.</div></blockquote>
 <p class="first admonition-title">Note</p>
 <p class="last">The definition for using or not using <em>dummy</em> node is the same. However,
 implementation difference can be seen by observing how the program construct
-a list: in my case, <span class="xref std std-ref">initializeList</span>.</p>
+a list: in my case, <a class="reference internal" href="../../11/28/maw-002.html#maw-002-rst"><span class="std std-ref">initializeList</span></a>.</p>
 </div>
 <div class="admonition-todo admonition">
 <p class="first admonition-title">TODO</p>
@@ -154,6 +154,39 @@ a list: in my case, <span class="xref std std-ref">initializeList</span>.</p>
 </div>
 <div class="section" id="solution-2">
 <h3>Solution 2</h3>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kt">void</span>
+ <span class="nf">reverseListIterative</span><span class="p">(</span><span class="n">List</span> <span class="n">L</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="n">Pos</span> <span class="n">dummyCurrent</span> <span class="o">=</span> <span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">,</span>
+       <span class="n">dummyPrev</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">,</span>
+       <span class="n">dummyNext</span><span class="p">;</span>
+
+   <span class="k">while</span> <span class="p">(</span><span class="n">dummyCurrent</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+   <span class="p">{</span>
+     <span class="n">dummyNext</span> <span class="o">=</span> <span class="n">dummyCurrent</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+     <span class="n">dummyCurrent</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">dummyPrev</span><span class="p">;</span>
+     <span class="n">dummyPrev</span> <span class="o">=</span> <span class="n">dummyCurrent</span><span class="p">;</span>
+     <span class="n">dummyCurrent</span> <span class="o">=</span> <span class="n">dummyNext</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">dummyPrev</span><span class="p">;</span>
+ <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
 <p>The 2nd solution is an iterative approach. The logic itself is quite straightforward.
 But, please always remember we assume <em>dummy</em> node exists. You can see both from
 Line[4] and Line[15].</p>
@@ -166,6 +199,47 @@ works but is not as nice as this one. You can check it out in my
 </div>
 <div class="section" id="solution-3">
 <h3>Solution 3</h3>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="k">static</span> <span class="n">List</span> <span class="n">P</span><span class="p">;</span>
+ <span class="k">static</span> <span class="kt">void</span>
+ <span class="nf">reverseListRecursiveHelper</span><span class="p">(</span><span class="n">List</span> <span class="n">L</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+   <span class="p">{</span>
+     <span class="n">P</span> <span class="o">=</span> <span class="n">L</span><span class="p">;</span>
+     <span class="k">return</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="n">reverseListRecursiveHelper</span><span class="p">(</span><span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">);</span>
+   <span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">L</span><span class="p">;</span>
+   <span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+ <span class="p">}</span>
+
+ <span class="kt">void</span>
+ <span class="nf">reverseListRecursive</span><span class="p">(</span><span class="n">List</span> <span class="n">L</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="n">reverseListRecursiveHelper</span><span class="p">(</span><span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">);</span>
+   <span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">P</span><span class="p">;</span>
+ <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
 <p>This solution is a recursive solution. This causes me much time to think about
 because we have a <em>dummy</em> node to be taken care of. That&#8217;s why I use a private
 helper function. There is a couple important points to be noticed here:</p>
@@ -189,13 +263,74 @@ also why the first data node in the original list is passed into the helper func
 <p class="first admonition-title">Warning</p>
 <p class="last">the following code is NOT CORRECT.</p>
 </div>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">List</span> <span class="n">P</span><span class="p">;</span>
+<span class="kt">void</span>
+<span class="nf">reverseListRecursive</span><span class="p">(</span><span class="n">List</span> <span class="n">L</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="c1">// empty list base case</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// only one node (tail node) base case</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">reverseListRecursive</span><span class="p">(</span><span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">);</span>
+  <span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span><span class="o">-&gt;</span><span class="n">Next</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+  <span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+  <span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">P</span><span class="p">;</span>
+ <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
 <p>The above code shows a perfect example why <em>dummy</em> node case cannot be handled
 in recursive call. This is because, when we do recursion, we always assume
 there is <em>dummy</em> node exists in the sub list we passed in. Read Line[6] &amp; Line[11]
 &amp;  Line[16] to see why.</p>
 </li>
 </ul>
-</div>
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_shortname = 'blog-ofbswlmyer';
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = '//blog-ofbswlmyer.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
 </div>
 </div>
 
