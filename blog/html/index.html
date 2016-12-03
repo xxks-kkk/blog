@@ -330,15 +330,17 @@ in recursive call. This is because, when we do recursion, we always assume
 there is <em>dummy</em> node exists in the sub list we passed in. Read Line[6] &amp; Line[11]
 &amp;  Line[16] to see why.</p>
 </li>
-</ul><div class="section" id="gdb-related">
-<h4>GDB related</h4>
+</ul></div>
+</div>
+<div class="section" id="gdb-related">
+<h2>GDB related</h2>
 <ul class="simple"><li><span class="docutils literal"><span class="pre">p</span></span> is the same as <span class="docutils literal"><span class="pre">print</span></span>. You can save a ton of typing.</li>
 <li>You can even directly check the value stored in address (i.e. <span class="docutils literal"><span class="pre">p</span> <span class="pre">*0x6040f0</span></span>).
 This makes sense because in C’s view, the variable name is the alias to memory address.</li>
 <li><span class="docutils literal"><span class="pre">bt</span></span> is your friend when work with recursive routine.</li>
 </ul></div>
 <div class="section" id="c-related">
-<h4>C related</h4>
+<h2>C related</h2>
 <ul class="simple"><li>you can initialize a list of variable using <span class="docutils literal"><span class="pre">Pos</span> <span class="pre">a,</span> <span class="pre">b,</span> <span class="pre">c</span></span> for instance.</li>
 <li>To quickly initailize an array of zero (i.e. array of size 100, you can do
 <span class="docutils literal"><span class="pre">int</span> <span class="pre">a[100]={0};</span></span>)</li>
@@ -362,8 +364,6 @@ s.setAttribute('data-timestamp', +new Date());
 (d.head || d.body).appendChild(s);
 })();
 </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
-</div>
-</div>
         </div>
         <div class="postmeta">
         <div class="author">
