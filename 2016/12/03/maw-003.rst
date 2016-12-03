@@ -75,7 +75,7 @@ This can be seen from Line[12]. Also, this routine has a return type ``List`` in
 
     The definition for using or not using *dummy* node is the same. However,
     implementation difference can be seen by observing how the program construct
-    a list: in my case, :ref:`initializeList <maw-002>`.
+    a list: in my case, :ref:`initializeList <maw-002.rst>`.
 
 .. admonition:: TODO 
 
