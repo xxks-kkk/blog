@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html><!--[if lt IE 7]>      <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Part of Zeyuan's Documentation that is ready to the public">
+        <meta name="viewport" content="width=device-width">
+        <title>Reverse Singly Linked List &mdash; Tech Stuff</title>
+            <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/tinkerturquoise.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+            <link rel="stylesheet" href="../../../_static/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="../../../_static/jessie.css" type="text/css" /><link rel="shortcut icon" href="../../../_static/tinkerer.ico" /><!-- Load modernizr and JQuery -->
+        <script src="../../../_static/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="../../../_static/plugins.js"></script>
+        <script src="../../../_static/main.js"></script>
+        <link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="MAW 3.2" href="../../11/28/maw-002.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script><script type="text/javascript" src="../../../_static/underscore.js"></script><script type="text/javascript" src="../../../_static/doctools.js"></script><script type="text/javascript" src="../../../_static/disqus.js"></script></head>
+    <body role="document">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+      <div id="container">
+  <header role="banner">
+            <hgroup>
+              <h1><a href="../../../index.html">Tech Stuff</a></h1><h2>a tmp place to rest</h2></hgroup>
+          </header>
+      
+  <nav>
+    <ul><li class="quicklink"><div class="rss">
+        <a href="../../../rss.html" title="Subscribe via RSS"><span class="fa fa-lg fa-rss"></span></a>
+    </div></li><li class="main-nav">
+          <a href="../../../index.html">Home</a>
+        </li>
+      <li class="main-nav">
+          <a href="../../../pages/about.html">About</a>
+        </li>
+      <li class="main-nav">
+          <a href="../../../pages/readinglist.html">Reading List</a>
+        </li>
+      <li>
+          <a href="../../../archive.html">Archives</a>
+        </li>
+    </ul>
+  </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>December 03, 2016</span>
+        </div>
+    <div class="section" id="reverse-singly-linked-list">
+<span id="maw-003-rst"></span><h1>Reverse Singly Linked List</h1>
+<div class="section" id="problem">
+<h2>Problem</h2>
+<p>This problem is MAW 3.12:</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li>Write a nonrecursive procedure to reverse a singly linked list in O(N) time.</li>
+<li>Write a procedure to reverse a singly linked list in O(N) time using constant
+extra space.</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="solution">
+<h2>Solution</h2>
+<p>Essentially, this is just one problem: reverse a singly linked list with various
+constraints. There are a couple of ways doing so.</p>
+<ul class="simple">
+<li>1st solution satisfies 3.12.a</li>
+<li>2nd, 3rd solutin satisfies 3.12.a and 3.12.b</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Solution 2 &amp; 3 are probably most people will expect, particularly during an
+interview.</p>
+</div>
+<div class="section" id="solution-1">
+<h3>Solution 1</h3>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">List</span>
+ <span class="nf">reverseList</span><span class="p">(</span><span class="n">List</span> <span class="n">L</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="n">Pos</span> <span class="n">dummyL</span> <span class="o">=</span> <span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+   <span class="n">List</span> <span class="n">R</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Node</span><span class="p">));</span>
+
+   <span class="k">while</span> <span class="p">(</span><span class="n">dummyL</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+   <span class="p">{</span>
+     <span class="n">Pos</span> <span class="n">tmpNode</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Node</span><span class="p">));</span>
+     <span class="n">tmpNode</span><span class="o">-&gt;</span><span class="n">Element</span> <span class="o">=</span> <span class="n">dummyL</span><span class="o">-&gt;</span><span class="n">Element</span><span class="p">;</span>
+     <span class="n">tmpNode</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">R</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+     <span class="n">R</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">tmpNode</span><span class="p">;</span>
+     <span class="n">dummyL</span> <span class="o">=</span> <span class="n">dummyL</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="k">return</span> <span class="n">R</span><span class="p">;</span>
+ <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Solution 1 is pretty straightforward. We first create a new list. Then, we walk
+through the original list and insert node we visit at the very beginning of the
+new list. Once we finish the traversal of the original list, we return the new list.</p>
+<p>This solution shows one of the reasons why we use a <em>header</em> node or <em>dummy</em> node
+in our linked list implementation (instead of just use a pointer directly pointing
+towards the first element in the list):</p>
+<blockquote>
+<div>Without the dummy node, there is no really obvious way to insert at the
+front of the list.</div></blockquote>
+<p>This can be seen from Line[12]. Also, this routine has a return type <span class="docutils literal"><span class="pre">List</span></span> instead of
+<span class="docutils literal"><span class="pre">void</span></span>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The definition for using or not using <em>dummy</em> node is the same. However,
+implementation difference can be seen by observing how the program construct
+a list: in my case, <span class="xref std std-ref">initializeList</span>.</p>
+</div>
+<div class="admonition-todo admonition">
+<p class="first admonition-title">TODO</p>
+<p class="last">Will the newly allocated memory inside function creates any memory inefficiency?</p>
+</div>
+</div>
+<div class="section" id="solution-2">
+<h3>Solution 2</h3>
+<p>The 2nd solution is an iterative approach. The logic itself is quite straightforward.
+But, please always remember we assume <em>dummy</em> node exists. You can see both from
+Line[4] and Line[15].</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This actually not the solution I come up initially. My initial implementation
+works but is not as nice as this one. You can check it out in my
+<a class="reference external" href="https://github.com/xxks-kkk/algo/blob/master/linkedList/linkedList.c">linkedList.c</a></p>
+</div>
+</div>
+<div class="section" id="solution-3">
+<h3>Solution 3</h3>
+<p>This solution is a recursive solution. This causes me much time to think about
+because we have a <em>dummy</em> node to be taken care of. That&#8217;s why I use a private
+helper function. There is a couple important points to be noticed here:</p>
+<ul>
+<li><p class="first">Use a static List variable <span class="docutils literal"><span class="pre">P</span></span> is necessary because we need to keep track of
+where is our first node after reverse (i.e. the last node in the original list
+will become the first node after reversal). This is important because without
+<span class="docutils literal"><span class="pre">P</span></span>, we cannot access the first node because all the links are reversed and
+we can no longer traverse the list from our <em>dummy</em> node.</p>
+</li>
+<li><p class="first">Inside <span class="docutils literal"><span class="pre">reverseListRecursiveHelper</span></span>, I don&#8217;t have to check if <span class="docutils literal"><span class="pre">L</span></span> is <span class="docutils literal"><span class="pre">NULL</span></span>
+(You need to do this for no <em>dummy</em> node implementation style). Essentially, this
+is the base case where I got passed in an empty list. Since in our implementation,
+<em>dummy</em> node always exists even when the list is empty (check out <span class="docutils literal"><span class="pre">deleteList</span></span> routine),
+<span class="docutils literal"><span class="pre">L-&gt;Next</span></span> is always valid (we don&#8217;t want to reference <span class="docutils literal"><span class="pre">L</span></span>, which is <span class="docutils literal"><span class="pre">NULL</span></span> already).</p>
+</li>
+<li><p class="first">We use a private function mainly because we have <em>dummy</em> node in our implementation.
+This is a special case that cannot be handled inside the recusive call. That&#8217;s
+also why the first data node in the original list is passed into the helper function.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">the following code is NOT CORRECT.</p>
+</div>
+<p>The above code shows a perfect example why <em>dummy</em> node case cannot be handled
+in recursive call. This is because, when we do recursion, we always assume
+there is <em>dummy</em> node exists in the sub list we passed in. Read Line[6] &amp; Line[11]
+&amp;  Line[16] to see why.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+    <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeyuan Hu</span>
+        </div>
+        <div class="categories">
+            <span>
+                Filed under:
+                <a href="../../../categories/c.html">c</a>, <a href="../../../categories/data_structure.html">data-structure</a>, <a href="../../../categories/linked_list.html">linked-list</a>, <a href="../../../categories/gdb.html">gdb</a></span>
+        </div>
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="../../../tags/c.html">c</a>, <a href="../../../tags/singly_linked_list.html">singly-linked-list</a>, <a href="../../../tags/gdb.html">gdb</a></span>
+        </div>
+        </div>
+    <ul class="related clearfix">
+            <li class="left"></li>
+            <li class="right"><a href="../../11/28/maw-002.html">MAW 3.2</a> &raquo; </li>
+        </ul></article><aside class="sidebar"><section><div class="widget">
+    <h1>Recent Posts</h1>
+    <ul><li>
+            <a href="#">Reverse Singly Linked List</a>
+        </li><li>
+            <a href="../../11/28/maw-002.html">MAW 3.2</a>
+        </li><li>
+            <a href="../../11/27/maw-001.html">Generate a Linked List from a given array</a>
+        </li><li>
+            <a href="../../11/27/automatically_publish_tinkerer_bld_output_to_github_with_travis_ci.html">Automatically publish Tinkerer bld output to GitHub with Travis CI</a>
+        </li><li>
+            <a href="../../11/23/hello_world.html">Hello World</a>
+        </li></ul>
+</div>
+</section><section><div class="widget">
+    <h1>Categories</h1>
+    <ul><li><a href="../../../categories/c.html">c</a> (3)</li><li><a href="../../../categories/data_structure.html">data-structure</a> (3)</li><li><a href="../../../categories/gdb.html">gdb</a> (1)</li><li><a href="../../../categories/github.html">github</a> (1)</li><li><a href="../../../categories/linked_list.html">linked-list</a> (3)</li><li><a href="../../../categories/misc.html">misc</a> (1)</li><li><a href="../../../categories/travis_ci.html">travis-ci</a> (1)</li></ul>
+</div></section><section><div class="widget">
+    <h1>Tags Cloud</h1>
+      <a href="../../../tags/c.html" style="font-size: 20pt">c</a>&nbsp;&nbsp;
+      <a href="../../../tags/gdb.html" style="font-size: 8pt">gdb</a>&nbsp;&nbsp;
+      <a href="../../../tags/github.html" style="font-size: 8pt">github</a>&nbsp;&nbsp;
+      <a href="../../../tags/meta.html" style="font-size: 8pt">meta</a>&nbsp;&nbsp;
+      <a href="../../../tags/singly_linked_list.html" style="font-size: 20pt">singly-linked-list</a>&nbsp;&nbsp;
+      <a href="../../../tags/travis_ci.html" style="font-size: 8pt">travis-ci</a>
+</div></section><section><div class="widget" id="searchbox" role="search">
+    <h1><a href="#searchbox">Search</a></h1>
+    <form action="../../../search.html" method="get">
+        <input type="text" name="q" />
+        <button type="submit"><span class="fa fa-search"></span></button>
+    </form>
+</div></section></aside></div> <!-- #main --></div> <!-- #main-container -->
+
+        <div class="footer-container" role="contentinfo"><footer class="wrapper">&copy; Copyright 2016, Zeyuan Hu. Powered by <a href="http://www.tinkerer.me/" target="_blank">Tinkerer</a> and <a href="http://sphinx.pocoo.org/" target="_blank">Sphinx</a>. <a href="https://pypi.python.org/pypi/sphinxjp.themes.tinkerturquoise" target="_blank">This theme</a> is originally designed by <a href="http://naoiwata.github.com/" target="_blank">naoiwata</a>.</footer>
+  <script type="text/javascript">
+    var FixZoom,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+    FixZoom = (function() {
+      var ua;
+      ua = window.navigator.userAgent.toLowerCase();
+
+      function FixZoom() {
+        this.on_resize = __bind(this.on_resize, this);
+        this.dom_id = 'wrap';
+        this.max_width = 640;
+        this.device_width = null;
+        this.device_height = null;
+        this.window_width = window.innerWidth;
+        this.window_height = window.innerHeight;
+        this.iphone = ua.indexOf('iphone') > -1;
+        this.ipod = ua.indexOf('ipod') > -1;
+        this.ipad = ua.indexOf('ipad') > -1;
+        this.android = ua.indexOf('android') > -1;
+      }
+
+      FixZoom.prototype.init = function(dom_id, max) {
+        var _this = this;
+        this.dom_id = dom_id;
+        if (max > 0) {
+          this.max_width = max;
+        }
+        setTimeout(function() {
+          window.scrollTo(0, 1);
+          return _this.on_resize();
+        }, 100);
+        this.set_ua();
+        this.on_resize();
+        window.addEventListener('resize', this.on_resize);
+      };
+
+      FixZoom.prototype.on_resize = function() {
+        var wrapper;
+        if (!this.iphone && !this.ipod && !this.android) {
+          return;
+        }
+        this.window_width = window.innerWidth;
+        wrapper = document.getElementById(this.dom_id);
+        if (this.window_width >= this.max_width) {
+          wrapper.style.width = this.max_width + 'px';
+          wrapper.style.margin = '0 auto';
+        } else {
+          wrapper.style.zoom = this.window_width / this.max_width;
+        }
+      };
+
+      FixZoom.prototype.set_ua = function() {
+        if (this.iphone || this.android || this.ipad || this.ipod) {
+          document.body.className += ' sp';
+        } else {
+          document.body.className += ' pc';
+        }
+      };
+
+      return FixZoom;
+
+    })();
+
+    window.fix_zoom = new FixZoom();
+    $('head').append('<meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" name="viewport" />');
+    fix_zoom.init('container', 640);
+  </script></div> <!-- footer-container -->
+
+      </div> <!--! end of #container --><script type="text/javascript">    var disqus_shortname = "blog-ofbswlmyer";    disqus_count();</script><!--[if lt IE 7 ]>
+          <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+          <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+        <![endif]-->
+    </body>
+</html>

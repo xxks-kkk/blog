@@ -14,10 +14,11 @@ Perface
 
 Well, I'm starting to work through 
 `Data Structures and Algorithm Analysis in C (2nd edition) <https://www.amazon.com/Data-Structures-Algorithm-Analysis-2nd/dp/0201498405>`_
-(referenced as MAW in the following posts) a couple of months agao to serve with two purposes:
+(referenced as MAW in the following posts) a couple of months agao to serve several purposes:
 
 - to get enough familarity with C programming language
 - to keep my computer science foundation knowledge fresh
+- I'm interested in System-level programming and mastering C and C++ is a must.
 
 I work on DB2 codebase but I don't play around the material I mentioned above a lot. 
 Things can get rusty pretty quickly. So, I need a way to keep fresh.

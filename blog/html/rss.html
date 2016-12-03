@@ -5,8 +5,140 @@
         <link>http://zhu45.org/blog/blog/html/index.html/</link>
         <description>a tmp place to rest</description>
         <language>en-us</language>
-        <pubDate>Mon, 28 Nov 2016 00:00:00 +0000</pubDate>
+        <pubDate>Sat, 03 Dec 2016 00:00:00 +0000</pubDate>
         
+        <item>
+            <link>http://zhu45.org/blog/blog/html/index.html/2016/12/03/maw-003.html</link>
+            <guid>http://zhu45.org/blog/blog/html/index.html/2016/12/03/maw-003.html</guid>
+            <title><![CDATA[Reverse Singly Linked List]]></title>
+            <description><![CDATA[<span id="maw-003-rst"/><h1>Reverse Singly Linked List</h1>
+<div class="section" id="problem">
+<h2>Problem</h2>
+<p>This problem is MAW 3.12:</p>
+<blockquote>
+<div><ol class="loweralpha simple"><li>Write a nonrecursive procedure to reverse a singly linked list in O(N) time.</li>
+<li>Write a procedure to reverse a singly linked list in O(N) time using constant
+extra space.</li>
+</ol></div></blockquote>
+</div>
+<div class="section" id="solution">
+<h2>Solution</h2>
+<p>Essentially, this is just one problem: reverse a singly linked list with various
+constraints. There are a couple of ways doing so.</p>
+<ul class="simple"><li>1st solution satisfies 3.12.a</li>
+<li>2nd, 3rd solutin satisfies 3.12.a and 3.12.b</li>
+</ul><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Solution 2 &amp; 3 are probably most people will expect, particularly during an
+interview.</p>
+</div>
+<div class="section" id="solution-1">
+<h3>Solution 1</h3>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span/> <span class="n">List</span>
+ <span class="nf">reverseList</span><span class="p">(</span><span class="n">List</span> <span class="n">L</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="n">Pos</span> <span class="n">dummyL</span> <span class="o">=</span> <span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+   <span class="n">List</span> <span class="n">R</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Node</span><span class="p">));</span>
+
+   <span class="k">while</span> <span class="p">(</span><span class="n">dummyL</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+   <span class="p">{</span>
+     <span class="n">Pos</span> <span class="n">tmpNode</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Node</span><span class="p">));</span>
+     <span class="n">tmpNode</span><span class="o">-&gt;</span><span class="n">Element</span> <span class="o">=</span> <span class="n">dummyL</span><span class="o">-&gt;</span><span class="n">Element</span><span class="p">;</span>
+     <span class="n">tmpNode</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">R</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+     <span class="n">R</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">tmpNode</span><span class="p">;</span>
+     <span class="n">dummyL</span> <span class="o">=</span> <span class="n">dummyL</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="k">return</span> <span class="n">R</span><span class="p">;</span>
+ <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>Solution 1 is pretty straightforward. We first create a new list. Then, we walk
+through the original list and insert node we visit at the very beginning of the
+new list. Once we finish the traversal of the original list, we return the new list.</p>
+<p>This solution shows one of the reasons why we use a <em>header</em> node or <em>dummy</em> node
+in our linked list implementation (instead of just use a pointer directly pointing
+towards the first element in the list):</p>
+<blockquote>
+<div>Without the dummy node, there is no really obvious way to insert at the
+front of the list.</div></blockquote>
+<p>This can be seen from Line[12]. Also, this routine has a return type <span class="docutils literal"><span class="pre">List</span></span> instead of
+<span class="docutils literal"><span class="pre">void</span></span>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The definition for using or not using <em>dummy</em> node is the same. However,
+implementation difference can be seen by observing how the program construct
+a list: in my case, <span class="xref std std-ref">initializeList</span>.</p>
+</div>
+<div class="admonition-todo admonition">
+<p class="first admonition-title">TODO</p>
+<p class="last">Will the newly allocated memory inside function creates any memory inefficiency?</p>
+</div>
+</div>
+<div class="section" id="solution-2">
+<h3>Solution 2</h3>
+<p>The 2nd solution is an iterative approach. The logic itself is quite straightforward.
+But, please always remember we assume <em>dummy</em> node exists. You can see both from
+Line[4] and Line[15].</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This actually not the solution I come up initially. My initial implementation
+works but is not as nice as this one. You can check it out in my
+<a class="reference external" href="https://github.com/xxks-kkk/algo/blob/master/linkedList/linkedList.c">linkedList.c</a></p>
+</div>
+</div>
+<div class="section" id="solution-3">
+<h3>Solution 3</h3>
+<p>This solution is a recursive solution. This causes me much time to think about
+because we have a <em>dummy</em> node to be taken care of. That’s why I use a private
+helper function. There is a couple important points to be noticed here:</p>
+<ul><li><p class="first">Use a static List variable <span class="docutils literal"><span class="pre">P</span></span> is necessary because we need to keep track of
+where is our first node after reverse (i.e. the last node in the original list
+will become the first node after reversal). This is important because without
+<span class="docutils literal"><span class="pre">P</span></span>, we cannot access the first node because all the links are reversed and
+we can no longer traverse the list from our <em>dummy</em> node.</p>
+</li>
+<li><p class="first">Inside <span class="docutils literal"><span class="pre">reverseListRecursiveHelper</span></span>, I don’t have to check if <span class="docutils literal"><span class="pre">L</span></span> is <span class="docutils literal"><span class="pre">NULL</span></span>
+(You need to do this for no <em>dummy</em> node implementation style). Essentially, this
+is the base case where I got passed in an empty list. Since in our implementation,
+<em>dummy</em> node always exists even when the list is empty (check out <span class="docutils literal"><span class="pre">deleteList</span></span> routine),
+<span class="docutils literal"><span class="pre">L-&gt;Next</span></span> is always valid (we don’t want to reference <span class="docutils literal"><span class="pre">L</span></span>, which is <span class="docutils literal"><span class="pre">NULL</span></span> already).</p>
+</li>
+<li><p class="first">We use a private function mainly because we have <em>dummy</em> node in our implementation.
+This is a special case that cannot be handled inside the recusive call. That’s
+also why the first data node in the original list is passed into the helper function.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">the following code is NOT CORRECT.</p>
+</div>
+<p>The above code shows a perfect example why <em>dummy</em> node case cannot be handled
+in recursive call. This is because, when we do recursion, we always assume
+there is <em>dummy</em> node exists in the sub list we passed in. Read Line[6] &amp; Line[11]
+&amp;  Line[16] to see why.</p>
+</li>
+</ul></div>
+</div>]]></description>
+            <category><![CDATA[ c ]]></category>
+            <category><![CDATA[ data-structure ]]></category>
+            <category><![CDATA[ linked-list ]]></category>
+            <category><![CDATA[ gdb ]]></category>
+             <pubDate>Sat, 03 Dec 2016 00:00:00 +0000</pubDate>
+        </item>
+    
         <item>
             <link>http://zhu45.org/blog/blog/html/index.html/2016/11/28/maw-002.html</link>
             <guid>http://zhu45.org/blog/blog/html/index.html/2016/11/28/maw-002.html</guid>
@@ -187,9 +319,10 @@ s.setAttribute('data-timestamp', +new Date());
 <h2>Perface</h2>
 <p>Well, I’m starting to work through
 <a class="reference external" href="https://www.amazon.com/Data-Structures-Algorithm-Analysis-2nd/dp/0201498405">Data Structures and Algorithm Analysis in C (2nd edition)</a>
-(referenced as MAW in the following posts) a couple of months agao to serve with two purposes:</p>
+(referenced as MAW in the following posts) a couple of months agao to serve several purposes:</p>
 <ul class="simple"><li>to get enough familarity with C programming language</li>
 <li>to keep my computer science foundation knowledge fresh</li>
+<li>I’m interested in System-level programming and mastering C and C++ is a must.</li>
 </ul><p>I work on DB2 codebase but I don’t play around the material I mentioned above a lot.
 Things can get rusty pretty quickly. So, I need a way to keep fresh.</p>
 <div class="admonition important">
