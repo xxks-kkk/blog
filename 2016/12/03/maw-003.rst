@@ -75,7 +75,7 @@ This can be seen from Line[12]. Also, this routine has a return type ``List`` in
 
     The definition for using or not using *dummy* node is the same. However,
     implementation difference can be seen by observing how the program construct
-    a list: in my case, :ref:`initializeList<maw-002>`.
+    a list: in my case, :ref:`initializeList <maw-002>`.
 
 .. admonition:: TODO 
 
@@ -85,7 +85,7 @@ This can be seen from Line[12]. Also, this routine has a return type ``List`` in
 Solution 2
 ==========
 
-.. code-block::
+.. code-block:: c
    :linenos:
     
     void
@@ -119,7 +119,7 @@ Line[4] and Line[15].
 Solution 3
 ===========
 
-.. code-block::
+.. code-block:: c
    :linenos:
 
     static List P;
@@ -167,7 +167,7 @@ helper function. There is a couple important points to be noticed here:
 
       the following code is NOT CORRECT. 
       
-  .. code-block::
+  .. code-block:: c
      :linenos:
 
      List P;
@@ -199,4 +199,4 @@ helper function. There is a couple important points to be noticed here:
 
 
 
-.. include:: comment.rst
+.. include:: /comment.rst
