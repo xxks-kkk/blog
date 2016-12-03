@@ -24,10 +24,9 @@ extra space.</li>
 <div class="section" id="solution">
 <h2>Solution</h2>
 <p>Essentially, this is just one problem: reverse a singly linked list with various
-constraints. There are a couple of ways doing so.</p>
-<ul class="simple"><li>1st solution satisfies 3.12.a</li>
-<li>2nd, 3rd solutin satisfies 3.12.a and 3.12.b</li>
-</ul><div class="admonition note">
+constraints. There are a couple of ways doing so. All of them satisfy 3.12.a and
+3.12.b</p>
+<div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Solution 2 &amp; 3 are probably most people will expect, particularly during an
 interview.</p>
@@ -70,6 +69,10 @@ interview.</p>
 <p>Solution 1 is pretty straightforward. We first create a new list. Then, we walk
 through the original list and insert node we visit at the very beginning of the
 new list. Once we finish the traversal of the original list, we return the new list.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can use a stack to reverse the list. This will require O(N) extra space.</p>
+</div>
 <p>This solution shows one of the reasons why we use a <em>header</em> node or <em>dummy</em> node
 in our linked list implementation (instead of just use a pointer directly pointing
 towards the first element in the list):</p>
@@ -84,10 +87,37 @@ front of the list.</div></blockquote>
 implementation difference can be seen by observing how the program construct
 a list: in my case, <a class="reference internal" href="http://zhu45.org/blog/blog/html/index.html/2016/11/28/maw-002.html#maw-002-rst"><span class="std std-ref">initializeList</span></a>.</p>
 </div>
-<div class="admonition-todo admonition">
-<p class="first admonition-title">TODO</p>
-<p class="last">Will the newly allocated memory inside function creates any memory inefficiency?</p>
+<p>However, this solution wastes a ton of memory space and too many <span class="docutils literal"><span class="pre">malloc</span></span> operations,
+which basically duplicate the data. This is the place where the algorithm can be improved.</p>
+<div class="highlight-c"><div class="highlight"><pre><span/><span class="n">List</span>
+<span class="nf">reverseList</span><span class="p">(</span><span class="n">List</span> <span class="n">L</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">Pos</span> <span class="n">dummyL</span> <span class="o">=</span> <span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+  <span class="n">List</span> <span class="n">R</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Node</span><span class="p">));</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="n">dummyL</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="c1">// Remove element from old list.</span>
+    <span class="n">Pos</span> <span class="n">tmpNode</span> <span class="o">=</span> <span class="n">dummyL</span><span class="p">;</span>
+    <span class="n">dummyL</span> <span class="o">=</span> <span class="n">dummyL</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+
+    <span class="c1">// Insert element in new list.</span>
+    <span class="n">tmpNode</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">R</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+    <span class="n">R</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">tmpNode</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">R</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This solution has two interesting points:</p>
+<ul class="last simple"><li>It’s obvious that it’s correct: there are no corner cases to worry about
+and both two-line operations are familiar to anyone who’s manipulated a
+linked list.</li>
+<li>It’s pretty much identical to the Solution 2 (same number of temporary variables,
+same assignments in slightly different order).</li>
+</ul></div>
 </div>
 <div class="section" id="solution-2">
 <h3>Solution 2</h3>
@@ -195,10 +225,6 @@ is the base case where I got passed in an empty list. Since in our implementatio
 <li><p class="first">We use a private function mainly because we have <em>dummy</em> node in our implementation.
 This is a special case that cannot be handled inside the recusive call. That’s
 also why the first data node in the original list is passed into the helper function.</p>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">the following code is NOT CORRECT.</p>
-</div>
 <div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -245,6 +271,18 @@ in recursive call. This is because, when we do recursion, we always assume
 there is <em>dummy</em> node exists in the sub list we passed in. Read Line[6] &amp; Line[11]
 &amp;  Line[16] to see why.</p>
 </li>
+</ul><div class="section" id="gdb-related">
+<h4>GDB related</h4>
+<ul class="simple"><li><span class="docutils literal"><span class="pre">p</span></span> is the same as <span class="docutils literal"><span class="pre">print</span></span>. You can save a ton of typing.</li>
+<li>You can even directly check the value stored in address (i.e. <span class="docutils literal"><span class="pre">p</span> <span class="pre">*0x6040f0</span></span>).
+This makes sense because in C’s view, the variable name is the alias to memory address.</li>
+<li><span class="docutils literal"><span class="pre">bt</span></span> is your friend when work with recursive routine.</li>
+</ul></div>
+<div class="section" id="c-related">
+<h4>C related</h4>
+<ul class="simple"><li>you can initialize a list of variable using <span class="docutils literal"><span class="pre">Pos</span> <span class="pre">a,</span> <span class="pre">b,</span> <span class="pre">c</span></span> for instance.</li>
+<li>To quickly initailize an array of zero (i.e. array of size 100, you can do
+<span class="docutils literal"><span class="pre">int</span> <span class="pre">a[100]={0};</span></span>)</li>
 </ul><div id="disqus_thread"/>
 <script>
 
@@ -265,6 +303,7 @@ s.setAttribute('data-timestamp', +new Date());
 (d.head || d.body).appendChild(s);
 })();
 </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+</div>
 </div>]]></description>
             <category><![CDATA[ c ]]></category>
             <category><![CDATA[ data-structure ]]></category>
