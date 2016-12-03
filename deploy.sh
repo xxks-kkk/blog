@@ -53,7 +53,7 @@ if [ "$num_file_changed" -eq 1 -a "$file_changed" == "blog/doctrees/environment.
   exit 0
 fi
 
-git ls-files --deleted -z | xargs -0 git rm 2> /dev/null
+git add -u
 git add -A
 git commit -m "Deploy the build: ${SHA}"
 git status
