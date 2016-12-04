@@ -1,8 +1,8 @@
 .. _maw-002.rst:
 
-#######
-MAW 3.2
-#######
+#########
+PrintLots
+#########
 
 .. author:: default
 .. categories:: c, data-structure, linked-list
