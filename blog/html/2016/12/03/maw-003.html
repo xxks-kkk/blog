@@ -150,26 +150,43 @@ a list: in my case, <a class="reference internal" href="../../11/28/maw-002.html
 </div>
 <p>However, this solution wastes a ton of memory space and too many <span class="docutils literal"><span class="pre">malloc</span></span> operations,
 which basically duplicate the data. This is the place where the algorithm can be improved.</p>
-<div class="highlight-c"><div class="highlight"><pre><span></span><span class="n">List</span>
-<span class="nf">reverseList</span><span class="p">(</span><span class="n">List</span> <span class="n">L</span><span class="p">)</span>
-<span class="p">{</span>
-  <span class="n">Pos</span> <span class="n">dummyL</span> <span class="o">=</span> <span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
-  <span class="n">List</span> <span class="n">R</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Node</span><span class="p">));</span>
+<div class="highlight-c"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">List</span>
+ <span class="nf">reverseList</span><span class="p">(</span><span class="n">List</span> <span class="n">L</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="n">Pos</span> <span class="n">dummyL</span> <span class="o">=</span> <span class="n">L</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+   <span class="n">List</span> <span class="n">R</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">Node</span><span class="p">));</span>
 
-  <span class="k">while</span> <span class="p">(</span><span class="n">dummyL</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
-  <span class="p">{</span>
-    <span class="c1">// Remove element from old list.</span>
-    <span class="n">Pos</span> <span class="n">tmpNode</span> <span class="o">=</span> <span class="n">dummyL</span><span class="p">;</span>
-    <span class="n">dummyL</span> <span class="o">=</span> <span class="n">dummyL</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+   <span class="k">while</span> <span class="p">(</span><span class="n">dummyL</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+   <span class="p">{</span>
+     <span class="c1">// Remove element from old list.</span>
+     <span class="n">Pos</span> <span class="n">tmpNode</span> <span class="o">=</span> <span class="n">dummyL</span><span class="p">;</span>
+     <span class="n">dummyL</span> <span class="o">=</span> <span class="n">dummyL</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
 
-    <span class="c1">// Insert element in new list.</span>
-    <span class="n">tmpNode</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">R</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
-    <span class="n">R</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">tmpNode</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="n">R</span><span class="p">;</span>
-<span class="p">}</span>
+     <span class="c1">// Insert element in new list.</span>
+     <span class="n">tmpNode</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">R</span><span class="o">-&gt;</span><span class="n">Next</span><span class="p">;</span>
+     <span class="n">R</span><span class="o">-&gt;</span><span class="n">Next</span> <span class="o">=</span> <span class="n">tmpNode</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="k">return</span> <span class="n">R</span><span class="p">;</span>
+ <span class="p">}</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>This solution has two interesting points:</p>
@@ -332,8 +349,9 @@ also why the first data node in the original list is passed into the helper func
 </td></tr></table></div>
 <p>The above code shows a perfect example why <em>dummy</em> node case cannot be handled
 in recursive call. This is because, when we do recursion, we always assume
-there is <em>dummy</em> node exists in the sub list we passed in. Read Line[6] &amp; Line[11]
-&amp;  Line[16] to see why.</p>
+there is <em>dummy</em> node exists in the sub list we passed in. However, that is not
+what our list acutally is. You can see why our recursion assumes the <em>dummy</em> node exists by
+reading Line[6] &amp; Line[11] &amp; Line[16].</p>
 </li>
 </ul>
 </div>
