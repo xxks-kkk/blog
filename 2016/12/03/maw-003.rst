@@ -5,8 +5,8 @@ Reverse Singly Linked List
 ##########################
 
 .. author:: default
-.. categories:: c, data-structure, linked-list, gdb
-.. tags:: c, singly-linked-list, gdb
+.. categories:: c, data-structure, linked-list
+.. tags:: c, singly-linked-list
 
 *******
 Problem
@@ -225,21 +225,7 @@ helper function. There is a couple important points to be noticed here:
   there is *dummy* node exists in the sub list we passed in. Read Line[6] & Line[11]
   &  Line[16] to see why.
 
-***********
-GDB related
-***********
 
-- ``p`` is the same as ``print``. You can save a ton of typing.
-- You can even directly check the value stored in address (i.e. ``p *0x6040f0``).
-  This makes sense because in C's view, the variable name is the alias to memory address.
-- ``bt`` is your friend when work with recursive routine.
 
-*********
-C related
-*********
-
-- you can initialize a list of variable using ``Pos a, b, c`` for instance.
-- To quickly initailize an array of zero (i.e. array of size 100, you can do 
-  ``int a[100]={0};``)
 
 .. include:: /comment.rst
