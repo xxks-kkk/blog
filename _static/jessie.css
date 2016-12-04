@@ -1,10 +1,9 @@
-code,span.pre {
+code,span.docutils.literal {
     padding: 1px 4px;
     color: #D14;
     font-family: Menlo,Monaco,"Courier New",monospace;
     font-size: 15px;
-    /*background-color: #F7F7F9;*/
-    background-color: #FFF;
+    background-color: #F7F7F9;
     border: 1px solid #E1E1E8;
     font-weight: bold;
 }
