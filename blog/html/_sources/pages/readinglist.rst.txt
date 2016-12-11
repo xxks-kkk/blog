@@ -16,5 +16,5 @@ Others readings
 ***************
 
 - `What is the single most influential book every programmer should read? <http://stackoverflow.com/questions/1711/what-is-the-single-most-influential-book-every-programmer-should-read>`_
-- `程序员必读书单V1.0 <http://zh.lucida.me/blog/developer-reading-list/>`_
+- `绋嬪簭鍛樺繀璇讳功鍗昖1.0 <http://zh.lucida.me/blog/developer-reading-list/>`_
 
