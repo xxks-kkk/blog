@@ -11,4 +11,5 @@ Sitemap
    2016/11/23/hello_world
    pages/about
    pages/readinglist
+   pages/projects
 
