@@ -5,7 +5,7 @@ Reverse Singly Linked List
 ##########################
 
 .. author:: default
-.. categories:: c, data-structure, linked-list
+.. categories:: c, data-structure, linked-list, maw
 .. tags:: c, singly-linked-list
 
 *******
