@@ -10,6 +10,7 @@ My readings
 This is my programmer reading list. I only list the books that I have been working on or have finished.
 
 - `Data Structures and Algorithm Analysis in C (2nd Edition) <https://www.amazon.com/Data-Structures-Algorithm-Analysis-2nd/dp/0201498405>`_ (working)
+- `Computer Systems: A Programmer's Perspective (2nd Edition) <https://www.amazon.com/Computer-Systems-Programmers-Perspective-2nd/dp/0136108040>`_ (working)
 
 ***************
 Others readings
