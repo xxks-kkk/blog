@@ -4,7 +4,9 @@
 Minimal Emacs Tutorial
 ############################
 
-Last Update: Dec 14, 2016
+.. author:: default
+.. categories:: emacs
+.. tags:: emacs, tutorial, emacs-basic
 
 *******************
 Learn about Emacs
