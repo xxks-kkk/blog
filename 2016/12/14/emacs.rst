@@ -38,7 +38,7 @@ RET      the Return or **Enter** key
 SPC      the **Space bar** key
 ESC      the **Escape** key
 TAB	 the **TAB** key
-arrows   the arrow keys
+ARR      the arrow keys
 =======  ======================================================
 
 
@@ -55,7 +55,7 @@ System operation
 - **C-x C-c** close emacs
 - **C-x b** Open a promt to enter a buffer name
 - **C-h f** Describe a function (i.e., ``C-h f electric-indent-mode``, ``C-h f fboundp``)
-- **C-x arrows** quickly switch between buffers
+- **C-x ARR** quickly switch between buffers
 
 File Editing
 ===================
