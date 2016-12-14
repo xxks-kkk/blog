@@ -4,6 +4,7 @@ Sitemap
 .. toctree::
    :maxdepth: 1
 
+   2016/12/14/emacs
    2016/12/03/maw-003
    2016/11/28/maw-002
    2016/11/27/maw-001
