@@ -1,0 +1,459 @@
+
+
+<!DOCTYPE html><!--[if lt IE 7]>      <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Part of Zeyuan's Documentation that is ready to the public">
+        <meta name="viewport" content="width=device-width">
+        <title>Minimal Emacs Tutorial &mdash; Tech Stuff</title>
+            <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/tinkerturquoise.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+            <link rel="stylesheet" href="../../../_static/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="../../../_static/jessie.css" type="text/css" /><link rel="shortcut icon" href="../../../_static/tinkerer.ico" /><!-- Load modernizr and JQuery -->
+        <script src="../../../_static/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="../../../_static/plugins.js"></script>
+        <script src="../../../_static/main.js"></script>
+        <link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="Reverse Singly Linked List" href="../03/maw-003.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script><script type="text/javascript" src="../../../_static/underscore.js"></script><script type="text/javascript" src="../../../_static/doctools.js"></script><script type="text/javascript" src="../../../_static/disqus.js"></script></head>
+    <body role="document">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+      <div id="container">
+  <header role="banner">
+            <hgroup>
+              <h1><a href="../../../index.html">Tech Stuff</a></h1><h2>a tmp place to rest</h2></hgroup>
+          </header>
+      
+  <nav>
+    <ul><li class="quicklink"><div class="rss">
+        <a href="../../../rss.html" title="Subscribe via RSS"><span class="fa fa-lg fa-rss"></span></a>
+    </div></li><li class="main-nav">
+          <a href="../../../index.html">Home</a>
+        </li>
+      <li class="main-nav">
+          <a href="../../../pages/about.html">About</a>
+        </li>
+      <li class="main-nav">
+          <a href="../../../pages/readinglist.html">Reading List</a>
+        </li>
+      <li class="main-nav">
+          <a href="../../../pages/projects.html">Projects</a>
+        </li>
+      <li>
+          <a href="../../../archive.html">Archives</a>
+        </li>
+    </ul>
+  </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>December 14, 2016</span>
+        </div>
+    <div class="section" id="minimal-emacs-tutorial">
+<span id="emacs-rst"></span><h1>Minimal Emacs Tutorial</h1>
+<div class="section" id="learn-about-emacs">
+<h2>Learn about Emacs</h2>
+<p>Here I will cover some basic manipulation with text files using emacs. It should be enough to get started working with
+emacs.</p>
+<div class="section" id="terms-in-emacs">
+<h3>Terms in Emacs</h3>
+<ul class="simple">
+<li>Region: the highlighted area</li>
+<li>Kill: same as &#8220;cut&#8221;</li>
+<li>Yank: same as &#8220;paste&#8221;</li>
+</ul>
+</div>
+<div class="section" id="emacs-key-notation">
+<h3>Emacs Key Notation</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Prefix</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>C-</td>
+<td>(press and hold) the <strong>Control</strong> key</td>
+</tr>
+<tr class="row-odd"><td>M-</td>
+<td>the Meta key (the <strong>Alt</strong> key, on most keyboards)</td>
+</tr>
+<tr class="row-even"><td>S-</td>
+<td>the <strong>Shift</strong> key (ie. <span class="docutils literal"><span class="pre">S-TAB</span></span> means Shift Tab)</td>
+</tr>
+<tr class="row-odd"><td>DEL</td>
+<td>the <strong>Backspace</strong> key (not the Delete key).</td>
+</tr>
+<tr class="row-even"><td>RET</td>
+<td>the Return or <strong>Enter</strong> key</td>
+</tr>
+<tr class="row-odd"><td>SPC</td>
+<td>the <strong>Space bar</strong> key</td>
+</tr>
+<tr class="row-even"><td>ESC</td>
+<td>the <strong>Escape</strong> key</td>
+</tr>
+<tr class="row-odd"><td>TAB</td>
+<td>the <strong>TAB</strong> key</td>
+</tr>
+<tr class="row-even"><td>arrows</td>
+<td>the arrow keys</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="common-usage">
+<h3>Common Usage</h3>
+<div class="section" id="system-operation">
+<h4>System operation</h4>
+<ul class="simple">
+<li><strong>C-g</strong> keyboard-quit; cancels anything Emacs is executing. If you press
+any key sequence wrongly, <strong>C-g</strong> to cancel that incorrectly pressed key
+sequence and start again.</li>
+<li><strong>C-x C-c</strong> close emacs</li>
+<li><strong>C-x b</strong> Open a promt to enter a buffer name</li>
+<li><strong>C-h f</strong> Describe a function (i.e., <span class="docutils literal"><span class="pre">C-h</span> <span class="pre">f</span> <span class="pre">electric-indent-mode</span></span>, <span class="docutils literal"><span class="pre">C-h</span> <span class="pre">f</span> <span class="pre">fboundp</span></span>)</li>
+<li><strong>C-x arrows</strong> quickly switch between buffers</li>
+</ul>
+</div>
+<div class="section" id="file-editing">
+<h4>File Editing</h4>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">You need to set mark before you can use region operation. To know more about <a class="reference external" href="https://www.cs.colorado.edu/~main/cs1300-old/cs1300/doc/emacs/emacs_13.html">The Mark and Region</a></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To move or copy a region of text in emacs, you must first &#8220;mark&#8221; it, then kill or copy the marked text, move the cu
+rsor to the desired location, and restore the killed or copied text. A region of text is defined by marking one end         of it, then moving the cursor to the other end.</p>
+</div>
+<ul class="simple">
+<li><strong>C-&#64;</strong> Set the mark here</li>
+<li><strong>C-SPC</strong> Set the mark where point is</li>
+<li><strong>C-x-h</strong> Select the whole text</li>
+<li><strong>C-w</strong> kill the region</li>
+<li><strong>M-d</strong> kill forward to the end of the next word (<span class="docutils literal"><span class="pre">kill-word</span></span>)</li>
+<li><strong>C-y</strong> yank the region</li>
+<li><strong>M-w</strong> copy the region</li>
+<li><strong>C-k</strong> kill the whole line (note you need to put the cursor at the very beginning of the line)</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To copy text, kill it, yank it back immediately (so it&#8217;s as if you haven&#8217;t killed it, except it&#8217;s now in the kill ring
+), move elsewhere and yank it back again.</p>
+</div>
+<ul class="simple">
+<li><strong>C-x C-s</strong> save file</li>
+<li><strong>C-x C-v RET</strong> reload a file (alternative way is <strong>M-x revert-buffer</strong>)</li>
+<li><strong>C-/</strong> (<strong>C-x u</strong>) undo</li>
+<li><strong>C-r</strong> invoke backward search (type search word thereafter. Use <strong>C-r</strong>
+to repeatedly travel through the matches backward)</li>
+<li><strong>C-s</strong> similar to <strong>C-r</strong> but search forward</li>
+<li><strong>C-x r t</strong> insert words to multiple lines highlighted (the same thing you typed will be entered on all the lines you&#8217;ve
+selected)</li>
+<li><strong>M-x clipboard-yank</strong> paste the clipboard text to emacs (useful when using emacs GUI)</li>
+<li><strong>M-x clipboard-kill-region</strong> paste emacs text to clipboard</li>
+</ul>
+</div>
+<div class="section" id="cursor-movement">
+<h4>Cursor Movement</h4>
+<ul class="simple">
+<li><strong>ESC-&lt;</strong> go to the beginning of the file</li>
+<li><strong>ESC-a</strong> go to beginning of the sentence</li>
+<li><strong>ESC-e</strong> go to end of the sentence</li>
+<li><strong>C-a</strong> go to beginning of the line</li>
+<li><strong>C-e</strong> go to the end of the line</li>
+<li><strong>M-x goto-line</strong> go to the line specified</li>
+<li><strong>C-e RET</strong> simulate <span class="docutils literal"><span class="pre">o</span></span> in vi</li>
+<li><strong>C-a RET</strong> simulate <span class="docutils literal"><span class="pre">O</span></span> in vi</li>
+<li><strong>C-Up</strong> go to the cursor location before a chunk of test pasted</li>
+<li><strong>C-v</strong> page down</li>
+<li><strong>M-v</strong> page up</li>
+</ul>
+</div>
+<div class="section" id="searching-and-replacing">
+<h4>Searching and Replacing</h4>
+<ul>
+<li><p class="first"><strong>ESC-%</strong> (query-replace) - ask before replacing each OLD STRING with NEW STRING.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Type <span class="docutils literal"><span class="pre">y</span></span> to replace this one and go to the next one</li>
+<li>Type <span class="docutils literal"><span class="pre">n</span></span> to skip to next without replacing</li>
+<li>Type <span class="docutils literal"><span class="pre">!</span></span> to replace this one and remaining replacements without asking</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>Esc-x replace-string</strong> replace all occurrences of OLD STRING with NEW STRING.</p>
+</li>
+<li><p class="first"><strong>ESC-x list-matching-lines</strong> lists all the lines matching your pattern in a separate buffer, along with their numbers. Use &#8220;ESC-x goto-line&#8221; to go to the occurrence you&#8217;re interested in.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="manage-split-windows">
+<h4>Manage Split Windows</h4>
+<ul class="simple">
+<li><strong>C-x 2</strong> split-window-below</li>
+<li><strong>C-x 3</strong> split-window-right</li>
+<li><strong>C-x 1</strong> delete-other-windows (unsplit all)</li>
+<li><strong>C-x 0</strong> delete-window  (remove current pane)</li>
+<li><strong>C-x o</strong> other-window (cycles among the opening buffers)</li>
+</ul>
+</div>
+<div class="section" id="file-management-dired-mode">
+<h4>File Management (dired mode)</h4>
+<ul class="simple">
+<li><strong>M-x dired</strong> start view directory</li>
+<li><strong>^</strong> go to parent dir</li>
+<li><strong>g</strong> refresh dir listing</li>
+<li><strong>q</strong> Quit dired mode (buffer still exists)</li>
+<li><strong>RET</strong> Open the file or directory</li>
+<li><strong>o</strong> Open file in another window (move cursor to that window as well)</li>
+<li><strong>C-o</strong> Open file in another window but stay on dired buffer</li>
+<li><strong>+</strong> create new dir</li>
+<li><strong>C-x C-f</strong> Create a new file (yes, the command is the same as opening a new file in non-dired mode)</li>
+</ul>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://ergoemacs.org/emacs/file_management.html">Emacs: File Management on ergoemacs</a></p>
+</div>
+</div>
+<div class="section" id="other">
+<h4>Other</h4>
+<ul class="simple">
+<li><strong>M-x whitespace-mode</strong> allows you to explicitly see white-space, tab, newline. Especially useful when work
+with python.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="howtos">
+<h3>HowTos</h3>
+<div class="topic">
+<p class="topic-title first">Parent shell</p>
+<p>When running Emacs in a terminal, you can press <strong>C-z</strong>, type the shell command and then resume Emacs with <strong>fg</strong></p>
+</div>
+<div class="topic">
+<p class="topic-title first">How can I get Emacs to reload all my definitions that I have updated in .emacs without restarting Emacs?</p>
+<p>You can use the command load-file (<strong>M-x load-file</strong>, then press return twice to accept the default filename, which         is the current file being edited).</p>
+<p>You can also just move the point to the end of any sexp and press <strong>C-x C-e</strong> to execute just that sexp. Usually it&#8217;
+s not necessary to reload the whole file if you&#8217;re just changing a line or two.</p>
+<p><strong>M-x eval-buffer</strong> immediately evaluates all code in the buffer, its the quickest method, if your <span class="docutils literal"><span class="pre">.emacs</span></span> is
+idempotent.</p>
+<p>You can usually just re-evaluate the changed region. Mark the region of ~/.emacs that you&#8217;ve changed, and then use
+<strong>M-x eval-region RET</strong>. This is often safer than re-evaluating the entire file since it&#8217;s easy to write a .emacs
+file that doesn&#8217;t work quite right after being loaded twice.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Shift multiple lines with TAB</p>
+<p>Select multiply lines, then type <strong>C-u 8 C-x Tab</strong>, it will indent the region by 8 spaces. <strong>C-u -4 C-x Tab</strong> will un-indent by 4 spaces.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Switch between windows when one windows open with term</p>
+<p>If you open two windows, and one window open a term (ie. <strong>M-x term</strong>), now you want to switch back to another
+window. You may find out &#8220;C-x o&#8221; may no longer work. In this case, you may want to use <strong>C-c o</strong> to switch to next
+window from term</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Comment out multiple region</p>
+<p>Comment out multiple lines. Highlight the region and then <strong>M-x comment-region</strong>. To undo the comment,
+<strong>M-x uncomment-region</strong></p>
+</div>
+<div class="topic">
+<p class="topic-title first">Error during download request: Not Found</p>
+<p>Happened when you try to install a package (M-x package-install). <strong>M-x package-refresh-contents</strong> to rescue.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Editing multiple lines at the same time</p>
+<p>suppose I have the following chunk of code that I want to edit:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">printf</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">=</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="s2">&quot;Database&quot;</span> <span class="s2">&quot;bool_db&quot;</span>
+<span class="n">printf</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">=</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="s2">&quot;Username&quot;</span>  <span class="s2">&quot;admin&quot;</span>
+<span class="n">printf</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">=</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="s2">&quot;Password&quot;</span>  <span class="s2">&quot;password&quot;</span>
+<span class="n">printf</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">=</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="s2">&quot;ReadOnly&quot;</span>  <span class="s2">&quot;false&quot;</span>
+<span class="n">printf</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">=</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="s2">&quot;ShowSystemTables&quot;</span> <span class="s2">&quot;false&quot;</span>
+<span class="n">printf</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">=</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="s2">&quot;LegacySQLTables&quot;</span> <span class="s2">&quot;false&quot;</span>
+<span class="n">printf</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">=</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="s2">&quot;LoginTimeout&quot;</span> <span class="s2">&quot;0&quot;</span>
+</pre></div>
+</div>
+<p>and I want to remove all <span class="docutils literal"><span class="pre">printf</span> <span class="pre">&quot;%s=%s\n&quot;</span></span> in each line. I can do the following:</p>
+<ol class="arabic simple">
+<li>Mark the beginning of the region and invoke <strong>M-x rectangle-mark-mode</strong> (or <strong>C-x SPC</strong>) and select all the <span class="docutils literal"><span class="pre">printf</span> <span class="pre">&quot;%s=%s\n&quot;</span></span></li>
+<li>Delete them by <strong>M-x kill-region</strong> (or <strong>C-x r k</strong>)</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Instead of delete, you can use <strong>C-x r t string RET</strong> to replace rectangle contents with <em>string</em> con each line.</p>
+</div>
+</div>
+</div>
+<div class="section" id="resources">
+<h3>Resources</h3>
+<p>Personally reference them a lot. But there are ton online through google.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://mally.stanford.edu/~sr/computing/emacs.html">Stanford emacs basics</a></li>
+<li><a class="reference external" href="http://ergoemacs.org/emacs/emacs_find_replace.html">Xah Emacs Tutorial</a></li>
+<li><a class="reference external" href="https://github.com/caiorss/Emacs-Elisp-Programming">Emacs-Elisp-Programming</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="emacs-configuration">
+<h2>Emacs Configuration</h2>
+<p>This is my <a class="reference external" href="https://github.com/xxks-kkk/emacs-config">personal emacs configuration</a>.</p>
+</div>
+</div>
+
+    <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeyuan Hu</span>
+        </div>
+        <div class="categories">
+            <span>
+                Filed under:
+                <a href="../../../categories/emacs.html">emacs</a></span>
+        </div>
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="../../../tags/emacs.html">emacs</a>, <a href="../../../tags/tutorial.html">tutorial</a>, <a href="../../../tags/emacs_basic.html">emacs-basic</a></span>
+        </div>
+        </div>
+    <ul class="related clearfix">
+            <li class="left"></li>
+            <li class="right"><a href="../03/maw-003.html">Reverse Singly Linked List</a> &raquo; </li>
+        </ul></article><aside class="sidebar"><section><div class="widget">
+    <h1>Recent Posts</h1>
+    <ul><li>
+            <a href="#">Minimal Emacs Tutorial</a>
+        </li><li>
+            <a href="../03/maw-003.html">Reverse Singly Linked List</a>
+        </li><li>
+            <a href="../../11/28/maw-002.html">PrintLots</a>
+        </li><li>
+            <a href="../../11/27/maw-001.html">Generate a Linked List from a given array</a>
+        </li><li>
+            <a href="../../11/27/automatically_publish_tinkerer_bld_output_to_github_with_travis_ci.html">Automatically publish Tinkerer bld output to GitHub with Travis CI</a>
+        </li><li>
+            <a href="../../11/23/hello_world.html">Hello World</a>
+        </li></ul>
+</div>
+</section><section><div class="widget">
+    <h1>Categories</h1>
+    <ul><li><a href="../../../categories/c.html">c</a> (3)</li><li><a href="../../../categories/data_structure.html">data-structure</a> (3)</li><li><a href="../../../categories/emacs.html">emacs</a> (1)</li><li><a href="../../../categories/github.html">github</a> (1)</li><li><a href="../../../categories/linked_list.html">linked-list</a> (3)</li><li><a href="../../../categories/maw.html">maw</a> (3)</li><li><a href="../../../categories/misc.html">misc</a> (1)</li><li><a href="../../../categories/travis_ci.html">travis-ci</a> (1)</li></ul>
+</div></section><section><div class="widget">
+    <h1>Tags Cloud</h1>
+      <a href="../../../tags/c.html" style="font-size: 20pt">c</a>&nbsp;&nbsp;
+      <a href="../../../tags/emacs.html" style="font-size: 8pt">emacs</a>&nbsp;&nbsp;
+      <a href="../../../tags/emacs_basic.html" style="font-size: 8pt">emacs-basic</a>&nbsp;&nbsp;
+      <a href="../../../tags/github.html" style="font-size: 8pt">github</a>&nbsp;&nbsp;
+      <a href="../../../tags/meta.html" style="font-size: 8pt">meta</a>&nbsp;&nbsp;
+      <a href="../../../tags/singly_linked_list.html" style="font-size: 20pt">singly-linked-list</a>&nbsp;&nbsp;
+      <a href="../../../tags/travis_ci.html" style="font-size: 8pt">travis-ci</a>&nbsp;&nbsp;
+      <a href="../../../tags/tutorial.html" style="font-size: 8pt">tutorial</a>
+</div></section><section><div class="widget" id="searchbox" role="search">
+    <h1><a href="#searchbox">Search</a></h1>
+    <form action="../../../search.html" method="get">
+        <input type="text" name="q" />
+        <button type="submit"><span class="fa fa-search"></span></button>
+    </form>
+</div></section></aside></div> <!-- #main --></div> <!-- #main-container -->
+
+        <div class="footer-container" role="contentinfo"><footer class="wrapper">&copy; Copyright 2016, Zeyuan Hu. Powered by <a href="http://www.tinkerer.me/" target="_blank">Tinkerer</a> and <a href="http://sphinx.pocoo.org/" target="_blank">Sphinx</a>. <a href="https://pypi.python.org/pypi/sphinxjp.themes.tinkerturquoise" target="_blank">This theme</a> is originally designed by <a href="http://naoiwata.github.com/" target="_blank">naoiwata</a>.</footer>
+  <script type="text/javascript">
+    var FixZoom,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+    FixZoom = (function() {
+      var ua;
+      ua = window.navigator.userAgent.toLowerCase();
+
+      function FixZoom() {
+        this.on_resize = __bind(this.on_resize, this);
+        this.dom_id = 'wrap';
+        this.max_width = 640;
+        this.device_width = null;
+        this.device_height = null;
+        this.window_width = window.innerWidth;
+        this.window_height = window.innerHeight;
+        this.iphone = ua.indexOf('iphone') > -1;
+        this.ipod = ua.indexOf('ipod') > -1;
+        this.ipad = ua.indexOf('ipad') > -1;
+        this.android = ua.indexOf('android') > -1;
+      }
+
+      FixZoom.prototype.init = function(dom_id, max) {
+        var _this = this;
+        this.dom_id = dom_id;
+        if (max > 0) {
+          this.max_width = max;
+        }
+        setTimeout(function() {
+          window.scrollTo(0, 1);
+          return _this.on_resize();
+        }, 100);
+        this.set_ua();
+        this.on_resize();
+        window.addEventListener('resize', this.on_resize);
+      };
+
+      FixZoom.prototype.on_resize = function() {
+        var wrapper;
+        if (!this.iphone && !this.ipod && !this.android) {
+          return;
+        }
+        this.window_width = window.innerWidth;
+        wrapper = document.getElementById(this.dom_id);
+        if (this.window_width >= this.max_width) {
+          wrapper.style.width = this.max_width + 'px';
+          wrapper.style.margin = '0 auto';
+        } else {
+          wrapper.style.zoom = this.window_width / this.max_width;
+        }
+      };
+
+      FixZoom.prototype.set_ua = function() {
+        if (this.iphone || this.android || this.ipad || this.ipod) {
+          document.body.className += ' sp';
+        } else {
+          document.body.className += ' pc';
+        }
+      };
+
+      return FixZoom;
+
+    })();
+
+    window.fix_zoom = new FixZoom();
+    $('head').append('<meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" name="viewport" />');
+    fix_zoom.init('container', 640);
+  </script></div> <!-- footer-container -->
+
+      </div> <!--! end of #container --><script type="text/javascript">    var disqus_shortname = "blog-ofbswlmyer";    disqus_count();</script><!--[if lt IE 7 ]>
+          <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+          <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+        <![endif]-->
+    </body>
+</html>

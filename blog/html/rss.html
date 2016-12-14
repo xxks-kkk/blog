@@ -5,8 +5,224 @@
         <link>http://zhu45.org/blog/blog/html/index.html/</link>
         <description>a tmp place to rest</description>
         <language>en-us</language>
-        <pubDate>Sat, 03 Dec 2016 00:00:00 +0000</pubDate>
+        <pubDate>Wed, 14 Dec 2016 00:00:00 +0000</pubDate>
         
+        <item>
+            <link>http://zhu45.org/blog/blog/html/index.html/2016/12/14/emacs.html</link>
+            <guid>http://zhu45.org/blog/blog/html/index.html/2016/12/14/emacs.html</guid>
+            <title><![CDATA[Minimal Emacs Tutorial]]></title>
+            <description><![CDATA[<span id="emacs-rst"/><h1>Minimal Emacs Tutorial</h1>
+<div class="section" id="learn-about-emacs">
+<h2>Learn about Emacs</h2>
+<p>Here I will cover some basic manipulation with text files using emacs. It should be enough to get started working with
+emacs.</p>
+<div class="section" id="terms-in-emacs">
+<h3>Terms in Emacs</h3>
+<ul class="simple"><li>Region: the highlighted area</li>
+<li>Kill: same as “cut”</li>
+<li>Yank: same as “paste”</li>
+</ul></div>
+<div class="section" id="emacs-key-notation">
+<h3>Emacs Key Notation</h3>
+<table border="1" class="docutils"><colgroup><col width="11%"/><col width="89%"/></colgroup><thead valign="bottom"><tr class="row-odd"><th class="head">Prefix</th>
+<th class="head">Meaning</th>
+</tr></thead><tbody valign="top"><tr class="row-even"><td>C-</td>
+<td>(press and hold) the <strong>Control</strong> key</td>
+</tr><tr class="row-odd"><td>M-</td>
+<td>the Meta key (the <strong>Alt</strong> key, on most keyboards)</td>
+</tr><tr class="row-even"><td>S-</td>
+<td>the <strong>Shift</strong> key (ie. <span class="docutils literal"><span class="pre">S-TAB</span></span> means Shift Tab)</td>
+</tr><tr class="row-odd"><td>DEL</td>
+<td>the <strong>Backspace</strong> key (not the Delete key).</td>
+</tr><tr class="row-even"><td>RET</td>
+<td>the Return or <strong>Enter</strong> key</td>
+</tr><tr class="row-odd"><td>SPC</td>
+<td>the <strong>Space bar</strong> key</td>
+</tr><tr class="row-even"><td>ESC</td>
+<td>the <strong>Escape</strong> key</td>
+</tr><tr class="row-odd"><td>TAB</td>
+<td>the <strong>TAB</strong> key</td>
+</tr><tr class="row-even"><td>arrows</td>
+<td>the arrow keys</td>
+</tr></tbody></table></div>
+<div class="section" id="common-usage">
+<h3>Common Usage</h3>
+<div class="section" id="system-operation">
+<h4>System operation</h4>
+<ul class="simple"><li><strong>C-g</strong> keyboard-quit; cancels anything Emacs is executing. If you press
+any key sequence wrongly, <strong>C-g</strong> to cancel that incorrectly pressed key
+sequence and start again.</li>
+<li><strong>C-x C-c</strong> close emacs</li>
+<li><strong>C-x b</strong> Open a promt to enter a buffer name</li>
+<li><strong>C-h f</strong> Describe a function (i.e., <span class="docutils literal"><span class="pre">C-h</span> <span class="pre">f</span> <span class="pre">electric-indent-mode</span></span>, <span class="docutils literal"><span class="pre">C-h</span> <span class="pre">f</span> <span class="pre">fboundp</span></span>)</li>
+<li><strong>C-x arrows</strong> quickly switch between buffers</li>
+</ul></div>
+<div class="section" id="file-editing">
+<h4>File Editing</h4>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">You need to set mark before you can use region operation. To know more about <a class="reference external" href="https://www.cs.colorado.edu/~main/cs1300-old/cs1300/doc/emacs/emacs_13.html">The Mark and Region</a></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To move or copy a region of text in emacs, you must first “mark” it, then kill or copy the marked text, move the cu
+rsor to the desired location, and restore the killed or copied text. A region of text is defined by marking one end         of it, then moving the cursor to the other end.</p>
+</div>
+<ul class="simple"><li><strong>C-@</strong> Set the mark here</li>
+<li><strong>C-SPC</strong> Set the mark where point is</li>
+<li><strong>C-x-h</strong> Select the whole text</li>
+<li><strong>C-w</strong> kill the region</li>
+<li><strong>M-d</strong> kill forward to the end of the next word (<span class="docutils literal"><span class="pre">kill-word</span></span>)</li>
+<li><strong>C-y</strong> yank the region</li>
+<li><strong>M-w</strong> copy the region</li>
+<li><strong>C-k</strong> kill the whole line (note you need to put the cursor at the very beginning of the line)</li>
+</ul><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To copy text, kill it, yank it back immediately (so it’s as if you haven’t killed it, except it’s now in the kill ring
+), move elsewhere and yank it back again.</p>
+</div>
+<ul class="simple"><li><strong>C-x C-s</strong> save file</li>
+<li><strong>C-x C-v RET</strong> reload a file (alternative way is <strong>M-x revert-buffer</strong>)</li>
+<li><strong>C-/</strong> (<strong>C-x u</strong>) undo</li>
+<li><strong>C-r</strong> invoke backward search (type search word thereafter. Use <strong>C-r</strong>
+to repeatedly travel through the matches backward)</li>
+<li><strong>C-s</strong> similar to <strong>C-r</strong> but search forward</li>
+<li><strong>C-x r t</strong> insert words to multiple lines highlighted (the same thing you typed will be entered on all the lines you’ve
+selected)</li>
+<li><strong>M-x clipboard-yank</strong> paste the clipboard text to emacs (useful when using emacs GUI)</li>
+<li><strong>M-x clipboard-kill-region</strong> paste emacs text to clipboard</li>
+</ul></div>
+<div class="section" id="cursor-movement">
+<h4>Cursor Movement</h4>
+<ul class="simple"><li><strong>ESC-&lt;</strong> go to the beginning of the file</li>
+<li><strong>ESC-a</strong> go to beginning of the sentence</li>
+<li><strong>ESC-e</strong> go to end of the sentence</li>
+<li><strong>C-a</strong> go to beginning of the line</li>
+<li><strong>C-e</strong> go to the end of the line</li>
+<li><strong>M-x goto-line</strong> go to the line specified</li>
+<li><strong>C-e RET</strong> simulate <span class="docutils literal"><span class="pre">o</span></span> in vi</li>
+<li><strong>C-a RET</strong> simulate <span class="docutils literal"><span class="pre">O</span></span> in vi</li>
+<li><strong>C-Up</strong> go to the cursor location before a chunk of test pasted</li>
+<li><strong>C-v</strong> page down</li>
+<li><strong>M-v</strong> page up</li>
+</ul></div>
+<div class="section" id="searching-and-replacing">
+<h4>Searching and Replacing</h4>
+<ul><li><p class="first"><strong>ESC-%</strong> (query-replace) - ask before replacing each OLD STRING with NEW STRING.</p>
+<blockquote>
+<div><ul class="simple"><li>Type <span class="docutils literal"><span class="pre">y</span></span> to replace this one and go to the next one</li>
+<li>Type <span class="docutils literal"><span class="pre">n</span></span> to skip to next without replacing</li>
+<li>Type <span class="docutils literal"><span class="pre">!</span></span> to replace this one and remaining replacements without asking</li>
+</ul></div></blockquote>
+</li>
+<li><p class="first"><strong>Esc-x replace-string</strong> replace all occurrences of OLD STRING with NEW STRING.</p>
+</li>
+<li><p class="first"><strong>ESC-x list-matching-lines</strong> lists all the lines matching your pattern in a separate buffer, along with their numbers. Use “ESC-x goto-line” to go to the occurrence you’re interested in.</p>
+</li>
+</ul></div>
+<div class="section" id="manage-split-windows">
+<h4>Manage Split Windows</h4>
+<ul class="simple"><li><strong>C-x 2</strong> split-window-below</li>
+<li><strong>C-x 3</strong> split-window-right</li>
+<li><strong>C-x 1</strong> delete-other-windows (unsplit all)</li>
+<li><strong>C-x 0</strong> delete-window  (remove current pane)</li>
+<li><strong>C-x o</strong> other-window (cycles among the opening buffers)</li>
+</ul></div>
+<div class="section" id="file-management-dired-mode">
+<h4>File Management (dired mode)</h4>
+<ul class="simple"><li><strong>M-x dired</strong> start view directory</li>
+<li><strong>^</strong> go to parent dir</li>
+<li><strong>g</strong> refresh dir listing</li>
+<li><strong>q</strong> Quit dired mode (buffer still exists)</li>
+<li><strong>RET</strong> Open the file or directory</li>
+<li><strong>o</strong> Open file in another window (move cursor to that window as well)</li>
+<li><strong>C-o</strong> Open file in another window but stay on dired buffer</li>
+<li><strong>+</strong> create new dir</li>
+<li><strong>C-x C-f</strong> Create a new file (yes, the command is the same as opening a new file in non-dired mode)</li>
+</ul><div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://ergoemacs.org/emacs/file_management.html">Emacs: File Management on ergoemacs</a></p>
+</div>
+</div>
+<div class="section" id="other">
+<h4>Other</h4>
+<ul class="simple"><li><strong>M-x whitespace-mode</strong> allows you to explicitly see white-space, tab, newline. Especially useful when work
+with python.</li>
+</ul></div>
+</div>
+<div class="section" id="howtos">
+<h3>HowTos</h3>
+<div class="topic">
+<p class="topic-title first">Parent shell</p>
+<p>When running Emacs in a terminal, you can press <strong>C-z</strong>, type the shell command and then resume Emacs with <strong>fg</strong></p>
+</div>
+<div class="topic">
+<p class="topic-title first">How can I get Emacs to reload all my definitions that I have updated in .emacs without restarting Emacs?</p>
+<p>You can use the command load-file (<strong>M-x load-file</strong>, then press return twice to accept the default filename, which         is the current file being edited).</p>
+<p>You can also just move the point to the end of any sexp and press <strong>C-x C-e</strong> to execute just that sexp. Usually it’
+s not necessary to reload the whole file if you’re just changing a line or two.</p>
+<p><strong>M-x eval-buffer</strong> immediately evaluates all code in the buffer, its the quickest method, if your <span class="docutils literal"><span class="pre">.emacs</span></span> is
+idempotent.</p>
+<p>You can usually just re-evaluate the changed region. Mark the region of ~/.emacs that you’ve changed, and then use
+<strong>M-x eval-region RET</strong>. This is often safer than re-evaluating the entire file since it’s easy to write a .emacs
+file that doesn’t work quite right after being loaded twice.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Shift multiple lines with TAB</p>
+<p>Select multiply lines, then type <strong>C-u 8 C-x Tab</strong>, it will indent the region by 8 spaces. <strong>C-u -4 C-x Tab</strong> will un-indent by 4 spaces.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Switch between windows when one windows open with term</p>
+<p>If you open two windows, and one window open a term (ie. <strong>M-x term</strong>), now you want to switch back to another
+window. You may find out “C-x o” may no longer work. In this case, you may want to use <strong>C-c o</strong> to switch to next
+window from term</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Comment out multiple region</p>
+<p>Comment out multiple lines. Highlight the region and then <strong>M-x comment-region</strong>. To undo the comment,
+<strong>M-x uncomment-region</strong></p>
+</div>
+<div class="topic">
+<p class="topic-title first">Error during download request: Not Found</p>
+<p>Happened when you try to install a package (M-x package-install). <strong>M-x package-refresh-contents</strong> to rescue.</p>
+</div>
+<div class="topic">
+<p class="topic-title first">Editing multiple lines at the same time</p>
+<p>suppose I have the following chunk of code that I want to edit:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">printf</span> <span class="s2">"</span><span class="si">%s</span><span class="s2">=</span><span class="si">%s</span><span class="se">\n</span><span class="s2">"</span> <span class="s2">"Database"</span> <span class="s2">"bool_db"</span>
+<span class="n">printf</span> <span class="s2">"</span><span class="si">%s</span><span class="s2">=</span><span class="si">%s</span><span class="se">\n</span><span class="s2">"</span> <span class="s2">"Username"</span>  <span class="s2">"admin"</span>
+<span class="n">printf</span> <span class="s2">"</span><span class="si">%s</span><span class="s2">=</span><span class="si">%s</span><span class="se">\n</span><span class="s2">"</span> <span class="s2">"Password"</span>  <span class="s2">"password"</span>
+<span class="n">printf</span> <span class="s2">"</span><span class="si">%s</span><span class="s2">=</span><span class="si">%s</span><span class="se">\n</span><span class="s2">"</span> <span class="s2">"ReadOnly"</span>  <span class="s2">"false"</span>
+<span class="n">printf</span> <span class="s2">"</span><span class="si">%s</span><span class="s2">=</span><span class="si">%s</span><span class="se">\n</span><span class="s2">"</span> <span class="s2">"ShowSystemTables"</span> <span class="s2">"false"</span>
+<span class="n">printf</span> <span class="s2">"</span><span class="si">%s</span><span class="s2">=</span><span class="si">%s</span><span class="se">\n</span><span class="s2">"</span> <span class="s2">"LegacySQLTables"</span> <span class="s2">"false"</span>
+<span class="n">printf</span> <span class="s2">"</span><span class="si">%s</span><span class="s2">=</span><span class="si">%s</span><span class="se">\n</span><span class="s2">"</span> <span class="s2">"LoginTimeout"</span> <span class="s2">"0"</span>
+</pre></div>
+</div>
+<p>and I want to remove all <span class="docutils literal"><span class="pre">printf</span> <span class="pre">"%s=%s\n"</span></span> in each line. I can do the following:</p>
+<ol class="arabic simple"><li>Mark the beginning of the region and invoke <strong>M-x rectangle-mark-mode</strong> (or <strong>C-x SPC</strong>) and select all the <span class="docutils literal"><span class="pre">printf</span> <span class="pre">"%s=%s\n"</span></span></li>
+<li>Delete them by <strong>M-x kill-region</strong> (or <strong>C-x r k</strong>)</li>
+</ol><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Instead of delete, you can use <strong>C-x r t string RET</strong> to replace rectangle contents with <em>string</em> con each line.</p>
+</div>
+</div>
+</div>
+<div class="section" id="resources">
+<h3>Resources</h3>
+<p>Personally reference them a lot. But there are ton online through google.</p>
+<ul class="simple"><li><a class="reference external" href="http://mally.stanford.edu/~sr/computing/emacs.html">Stanford emacs basics</a></li>
+<li><a class="reference external" href="http://ergoemacs.org/emacs/emacs_find_replace.html">Xah Emacs Tutorial</a></li>
+<li><a class="reference external" href="https://github.com/caiorss/Emacs-Elisp-Programming">Emacs-Elisp-Programming</a></li>
+</ul></div>
+</div>
+<div class="section" id="emacs-configuration">
+<h2>Emacs Configuration</h2>
+<p>This is my <a class="reference external" href="https://github.com/xxks-kkk/emacs-config">personal emacs configuration</a>.</p>
+</div>]]></description>
+            <category><![CDATA[ emacs ]]></category>
+             <pubDate>Wed, 14 Dec 2016 00:00:00 +0000</pubDate>
+        </item>
+    
         <item>
             <link>http://zhu45.org/blog/blog/html/index.html/2016/12/03/maw-003.html</link>
             <guid>http://zhu45.org/blog/blog/html/index.html/2016/12/03/maw-003.html</guid>
