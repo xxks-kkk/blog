@@ -15,9 +15,9 @@ Learn about Emacs
 Here I will cover some basic manipulation with text files using emacs. It should be enough to get started working with
 emacs.
 
-==================
+==============
 Terms in Emacs
-==================
+==============
 
 - Region: the highlighted area
 - Kill: same as "cut"

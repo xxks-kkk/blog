@@ -8,3 +8,14 @@ code,span.docutils.literal {
     font-weight: bold;
 }
 
+div.topic {
+    border: 2px solid #c6c9cb;
+    padding: 10px 20px;
+    border-right-style: none;
+    border-left-style: none;
+}
+
+p.topic-title{
+    font-size: 1.1em;
+    font-weight: bold;
+}
